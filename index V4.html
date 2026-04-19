@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RaceHQ</title>
+<style>
+body { margin: 0; font-family: Helvetica Neue, Arial, sans-serif; background: #fff; color: #1F053B; }
+nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba(255,255,255,0.95); border-bottom: 1px solid #ECEDED; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; z-index: 100; }
+.logo svg { height: 24px; width: auto; display: block; }
+.logo svg path { fill: #1F053B !important; }
+.nav-ctas { display: flex; gap: 0.75rem; }
+.btn { padding: 0.55rem 1.25rem; border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; }
+.btn-outline { background: transparent; color: #1F053B; border: 1.5px solid #ECEDED; }
+.btn-dark { background: #1F053B; color: #fff; }
+#hero { min-height: 100vh; background: #1F053B; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 2rem 4rem; position: relative; overflow: hidden; }
+#hero::before { content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(176,38,255,0.2) 0%, transparent 70%); pointer-events: none; }
+#hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, #fff); pointer-events: none; }
+.hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(242,207,0,0.1); border: 1px solid rgba(242,207,0,0.25); border-radius: 100px; padding: 0.3rem 1rem; font-size: 0.75rem; font-weight: 500; color: #F2CF00; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2rem; position: relative; z-index: 2; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #F2CF00; }
+h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+h1 strong { color: #F2CF00; }
+.hero-sub { font-size: 1.15rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; z-index: 2; }
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 2; }
+.btn-yellow { background: #F2CF00; color: #000; padding: 0.85rem 2rem; border-radius: 10px; font-size: 1rem; }
+.btn-ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 0.85rem 2rem; border-radius: 10px; font-size: 1rem; }
+.ticker-wrap { width: 100%; overflow: hidden; background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.08); padding: 0.9rem 0; margin-top: 3rem; position: relative; z-index: 2; }
+.ticker { display: flex; gap: 3rem; width: max-content; animation: tickScroll 28s linear infinite; }
+.ticker-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.45); white-space: nowrap; }
+.ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: #F2CF00; flex-shrink: 0; }
+@keyframes tickScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+main { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #B026FF; display: block; margin-bottom: 1rem; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.025em; color: #1F053B; margin-bottom: 1rem; }
+.lead { font-size: 1.05rem; font-weight: 300; color: #666C6D; line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.split.flip .visual { order: -1; }
+.points { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.points li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: #666C6D; }
+.check { width: 20px; height: 20px; border-radius: 50%; background: #F2CF00; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; font-weight: 700; color: #000; margin-top: 1px; }
+.card { background: #fff; border: 1px solid #ECEDED; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+.card-bar { background: #f6f9fc; border-bottom: 1px solid #ECEDED; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.cd { width: 8px; height: 8px; border-radius: 50%; }
+.card-url { margin: 0 auto; font-size: 0.7rem; color: #8898aa; background: #ECEDED; padding: 0.2rem 0.75rem; border-radius: 4px; }
+.card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.event-row { display: flex; align-items: center; gap: 0.75rem; }
+.event-badge { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg,#F2CF00,#e8b800); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.event-name { font-size: 0.9rem; font-weight: 700; color: #1F053B; }
+.event-meta { font-size: 0.72rem; color: #8898aa; }
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+.stat-box { background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 8px; padding: 0.6rem 0.75rem; }
+.stat-val { font-size: 1rem; font-weight: 700; color: #1F053B; }
+.stat-lbl { font-size: 0.65rem; color: #8898aa; margin-top: 0.2rem; }
+.prog-hd { display: flex; justify-content: space-between; font-size: 0.72rem; color: #8898aa; margin-bottom: 0.3rem; }
+.prog-bar { height: 6px; background: #ECEDED; border-radius: 3px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,#F2CF00,#e8b800); width: 73%; }
+.entry { display: flex; align-items: center; gap: 0.6rem; background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 7px; padding: 0.5rem 0.7rem; }
+.av { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg,#B026FF,#FF12F0); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+.en { font-size: 0.78rem; font-weight: 500; color: #1F053B; flex: 1; }
+.et { font-size: 0.68rem; color: #8898aa; }
+.ep { font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(242,207,0,0.15); color: #7a6800; }
+.hub-lbl { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8898aa; }
+.deal { display: flex; align-items: center; gap: 0.65rem; background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 8px; padding: 0.6rem 0.75rem; }
+.deal-icon { width: 30px; height: 30px; border-radius: 6px; background: #ECEDED; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.deal-name { font-size: 0.78rem; font-weight: 500; color: #1F053B; flex: 1; }
+.deal-desc { font-size: 0.68rem; color: #8898aa; }
+.deal-cta { font-size: 0.68rem; font-weight: 700; color: #B026FF; }
+.earn-box { background: rgba(242,207,0,0.08); border: 1px solid rgba(242,207,0,0.25); border-radius: 8px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+.earn-lbl { font-size: 0.72rem; color: #666C6D; }
+.earn-val { font-size: 1.2rem; font-weight: 700; color: #1F053B; }
+.divider { border: none; border-top: 1px solid #ECEDED; margin: 0; }
+.stats-band { background: #1F053B; padding: 4rem 2rem; }
+.stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-block { padding: 1.5rem; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; }
+.stat-block:last-child { border-right: none; }
+.stat-big { font-size: clamp(2rem,4vw,2.75rem); font-weight: 700; letter-spacing: -0.03em; color: #fff; line-height: 1; margin-bottom: 0.4rem; }
+.stat-big em { font-style: normal; color: #F2CF00; }
+.stat-lbl2 { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+.audiences { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.aud-card { border-radius: 16px; padding: 2.5rem; }
+.aud-light { background: #f6f9fc; border: 1px solid #ECEDED; }
+.aud-dark { background: #1F053B; position: relative; overflow: hidden; }
+.aud-dark::after { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(ellipse,rgba(176,38,255,0.3),transparent 70%); pointer-events: none; }
+.aud-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+.aud-card h3 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: #1F053B; margin-bottom: 0.75rem; }
+.aud-dark h3 { color: #fff; }
+.aud-card p { font-size: 0.95rem; font-weight: 300; color: #666C6D; line-height: 1.7; margin-bottom: 1.75rem; }
+.aud-dark p { color: rgba(255,255,255,0.5); }
+.aud-points { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 0.55rem; }
+.aud-points li { font-size: 0.88rem; color: #666C6D; display: flex; align-items: center; gap: 0.6rem; }
+.aud-points li::before { content: "→"; color: #F2CF00; font-weight: 700; }
+.aud-dark .aud-points li { color: rgba(255,255,255,0.55); }
+.btn-yellow2 { background: #F2CF00; color: #000; padding: 0.75rem 1.75rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-block; }
+.btn-violet { background: #B026FF; color: #fff; padding: 0.75rem 1.75rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-block; }
+.waitlist { background: #ECEDED; padding: 5rem 2rem; }
+.waitlist-inner { max-width: 800px; margin: 0 auto; }
+.waitlist-hd { text-align: center; margin-bottom: 3.5rem; }
+.waitlist-hd h2 { margin-bottom: 0.75rem; }
+.waitlist-hd p { font-size: 1rem; font-weight: 300; color: #666C6D; }
+.waitlist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.wcard { background: #fff; border: 1px solid #ECEDED; border-radius: 16px; padding: 2.25rem; position: relative; overflow: hidden; }
+.wcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.wcard-races::before { background: #F2CF00; }
+.wcard-brands::before { background: linear-gradient(90deg,#B026FF,#FF12F0); }
+.wcard h3 { font-size: 1.15rem; font-weight: 700; color: #1F053B; margin-bottom: 0.4rem; }
+.wcard p { font-size: 0.88rem; color: #666C6D; font-weight: 300; line-height: 1.65; margin-bottom: 1.5rem; }
+form { display: flex; flex-direction: column; gap: 0.7rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.75rem; font-weight: 500; color: #666C6D; }
+input, select { background: #f6f9fc; border: 1.5px solid #ECEDED; border-radius: 8px; color: #1F053B; font-family: Helvetica Neue, Arial, sans-serif; font-size: 0.9rem; padding: 0.65rem 0.9rem; outline: none; width: 100%; box-sizing: border-box; }
+input:focus, select:focus { border-color: #1F053B; }
+select { appearance: none; cursor: pointer; }
+.btn-submit-races { width: 100%; padding: 0.75rem; background: #F2CF00; color: #000; border: none; border-radius: 9px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+.btn-submit-brands { width: 100%; padding: 0.75rem; background: #B026FF; color: #fff; border: none; border-radius: 9px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+.form-note { font-size: 0.72rem; color: #8898aa; text-align: center; }
+.form-success { display: none; text-align: center; padding: 2rem 1rem; }
+.form-success .check { font-size: 2rem; margin-bottom: 0.5rem; }
+.form-success h3 { font-size: 1.1rem; font-weight: 700; color: #1F053B; margin-bottom: 0.3rem; }
+.form-success p { font-size: 0.85rem; color: #666C6D; }
+footer { background: #1F053B; padding: 2.5rem 2rem; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-inner svg { height: 20px; width: auto; filter: invert(1); }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
+.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; }
+.footer-links a:hover { color: rgba(255,255,255,0.75); }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+@media(max-width:768px) { .split, .aud-grid, .waitlist-grid { grid-template-columns: 1fr; } .split.flip .visual { order: 0; } .stats-grid { grid-template-columns: repeat(2,1fr); } .stat-block:nth-child(2) { border-right: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="22" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 449.839844 393.894531 L 461.738281 393.894531 C 468.296875 393.894531 473.632812 388.554688 473.632812 381.996094 C 473.632812 375.4375 468.296875 370.101562 461.738281 370.101562 L 449.839844 370 Z M 474.695312 421.058594 L 485.65625 421.058594 L 469.464844 405.292969 L 472.601562 403.71875 C 480.882812 399.558594 486.027344 391.234375 486.027344 381.996094 C 486.027344 368.617188 475.140625 357.722656 461.761719 357.707031 L 437.449219 357.707031 L 437.449219 421.058594 L 444.839844 421.058594 L 444.839844 364.960938 L 461.707031 365.101562 C 471.054688 365.101562 478.632812 372.679688 478.632812 381.996094 C 478.632812 391.3125 471.054688 398.894531 461.738281 398.894531 L 452.929688 398.894531 Z M 497.957031 426.058594 L 472.597656 426.058594 L 449.839844 402.886719 L 449.839844 426.058594 L 432.449219 426.058594 L 432.449219 352.707031 L 461.765625 352.707031 C 477.902344 352.726562 491.027344 365.863281 491.027344 381.996094 C 491.027344 391.980469 486.050781 401.074219 477.832031 406.464844 Z M 497.957031 426.058594 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 506.582031 423.375 L 520.121094 423.375 L 543.023438 381.28125 L 567.050781 423.375 L 581.496094 423.375 L 542.761719 354.820312 Z M 506.582031 423.375 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 568.503906 420.878906 L 577.210938 420.878906 L 542.835938 360.035156 L 510.730469 420.878906 L 518.636719 420.878906 L 542.972656 376.144531 Z M 585.78125 425.878906 L 565.601562 425.878906 L 543.074219 386.414062 L 521.609375 425.878906 L 502.4375 425.878906 L 542.6875 349.605469 Z M 585.78125 425.878906 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 616.257812 412.570312 C 603.371094 412.570312 592.886719 402.085938 592.886719 389.195312 C 592.886719 376.308594 603.371094 365.824219 616.257812 365.824219 C 622.222656 365.824219 627.902344 368.070312 632.25 372.152344 L 640.730469 363.113281 C 634.078125 356.871094 625.386719 353.429688 616.257812 353.429688 C 596.535156 353.429688 580.488281 369.472656 580.488281 389.195312 C 580.488281 408.917969 596.535156 424.964844 616.257812 424.964844 C 625.390625 424.964844 634.082031 421.523438 640.738281 415.273438 L 632.253906 406.238281 C 627.90625 410.320312 622.222656 412.570312 616.257812 412.570312 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 616.257812 355.929688 C 597.914062 355.929688 582.988281 370.851562 582.988281 389.195312 C 582.988281 407.539062 597.914062 422.464844 616.257812 422.464844 C 623.910156 422.464844 631.238281 419.863281 637.140625 415.09375 L 632.058594 409.683594 C 627.546875 413.171875 622.023438 415.066406 616.257812 415.066406 C 601.992188 415.066406 590.386719 403.464844 590.386719 389.195312 C 590.386719 374.929688 601.992188 363.324219 616.257812 363.324219 C 622.019531 363.324219 627.542969 365.21875 632.054688 368.707031 L 637.132812 363.292969 C 631.230469 358.527344 623.910156 355.929688 616.257812 355.929688 M 616.257812 427.464844 C 595.15625 427.464844 577.988281 410.296875 577.988281 389.195312 C 577.988281 368.097656 595.15625 350.929688 616.257812 350.929688 C 626.023438 350.929688 635.320312 354.609375 642.441406 361.289062 L 644.265625 363 L 632.359375 375.683594 L 630.535156 373.972656 C 626.65625 370.332031 621.582031 368.324219 616.257812 368.324219 C 604.746094 368.324219 595.386719 377.6875 595.386719 389.195312 C 595.386719 400.707031 604.746094 410.066406 616.257812 410.066406 C 621.585938 410.066406 626.660156 408.058594 630.539062 404.414062 L 632.363281 402.703125 L 644.269531 415.386719 L 642.449219 417.097656 C 635.328125 423.78125 626.027344 427.464844 616.257812 427.464844 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 794.886719 385.226562 L 762.261719 385.226562 L 762.261719 354.84375 L 748.507812 354.84375 L 748.507812 423.195312 L 762.261719 423.195312 L 762.261719 398.980469 L 794.886719 398.980469 L 794.886719 423.195312 L 808.640625 423.195312 L 808.640625 354.84375 L 794.886719 354.84375 Z M 794.886719 385.226562 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 797.386719 420.695312 L 806.140625 420.695312 L 806.140625 357.34375 L 797.386719 357.34375 L 797.386719 387.726562 L 759.761719 387.726562 L 759.761719 357.34375 L 751.007812 357.34375 L 751.007812 420.695312 L 759.761719 420.695312 L 759.761719 396.476562 L 797.386719 396.476562 Z M 811.140625 425.695312 L 792.386719 425.695312 L 792.386719 401.476562 L 764.761719 401.476562 L 764.761719 425.695312 L 746.007812 425.695312 L 746.007812 352.34375 L 764.761719 352.34375 L 764.761719 382.726562 L 792.386719 382.726562 L 792.386719 352.34375 L 811.140625 352.34375 Z M 811.140625 425.695312 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 654.054688 411.238281 L 654.054688 423.375 L 701.3125 423.375 L 701.3125 411.238281 L 666.191406 411.238281 L 666.191406 398.054688 L 694.53125 398.054688 L 694.53125 385.917969 L 666.191406 385.917969 L 666.191406 366.738281 L 701.3125 366.738281 L 701.3125 354.601562 L 654.054688 354.601562 Z M 654.054688 411.238281 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 656.554688 420.878906 L 698.816406 420.878906 L 698.816406 413.738281 L 663.695312 413.738281 L 663.695312 395.554688 L 692.03125 395.554688 L 692.03125 388.417969 L 663.695312 388.417969 L 663.695312 364.238281 L 698.816406 364.238281 L 698.816406 357.101562 L 656.554688 357.101562 Z M 703.816406 425.878906 L 651.554688 425.878906 L 651.554688 352.101562 L 703.816406 352.101562 L 703.816406 369.238281 L 668.695312 369.238281 L 668.695312 383.417969 L 697.03125 383.417969 L 697.03125 400.554688 L 668.695312 400.554688 L 668.695312 408.738281 L 703.816406 408.738281 Z M 703.816406 425.878906 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 832.90625 389.382812 C 832.90625 376.351562 843.507812 365.753906 856.535156 365.753906 C 869.566406 365.753906 880.167969 376.351562 880.167969 389.382812 C 880.167969 402.414062 869.566406 413.011719 856.535156 413.011719 C 843.507812 413.011719 832.90625 402.414062 832.90625 389.382812 M 888.054688 428.855469 C 888.054688 428.855469 880.128906 417.246094 879.703125 416.175781 C 887.214844 409.671875 891.980469 400.078125 891.980469 389.382812 C 891.980469 369.839844 876.082031 353.9375 856.535156 353.9375 C 836.992188 353.9375 821.089844 369.839844 821.089844 389.382812 C 821.089844 408.929688 836.992188 424.828125 856.535156 424.828125 C 861.121094 424.828125 865.496094 423.945312 869.519531 422.355469 C 870.109375 423.574219 878.132812 435.292969 878.132812 435.292969 Z M 888.054688 428.855469 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 856.535156 368.253906 C 844.882812 368.253906 835.40625 377.734375 835.40625 389.382812 C 835.40625 401.035156 844.882812 410.511719 856.535156 410.511719 C 868.1875 410.511719 877.667969 401.035156 877.667969 389.382812 C 877.667969 377.734375 868.1875 368.253906 856.535156 368.253906 M 856.535156 415.511719 C 842.128906 415.511719 830.40625 403.792969 830.40625 389.382812 C 830.40625 374.976562 842.128906 363.253906 856.535156 363.253906 C 870.941406 363.253906 882.667969 374.976562 882.667969 389.382812 C 882.667969 403.792969 870.941406 415.511719 856.535156 415.511719 M 870.765625 419.175781 L 871.773438 421.269531 C 872.148438 421.988281 875.441406 426.910156 878.820312 431.867188 L 884.550781 428.148438 C 880.105469 421.613281 877.695312 417.898438 877.378906 417.101562 L 876.722656 415.453125 L 878.066406 414.289062 C 885.320312 408.003906 889.480469 398.929688 889.480469 389.382812 C 889.480469 371.214844 874.703125 356.4375 856.535156 356.4375 C 838.371094 356.4375 823.589844 371.214844 823.589844 389.382812 C 823.589844 407.550781 838.371094 422.328125 856.535156 422.328125 C 860.683594 422.328125 864.742188 421.554688 868.601562 420.03125 Z M 877.449219 438.71875 L 876.070312 436.707031 C 874.207031 433.988281 870.429688 428.441406 868.464844 425.398438 C 864.613281 426.679688 860.613281 427.328125 856.535156 427.328125 C 835.613281 427.328125 818.589844 410.304688 818.589844 389.382812 C 818.589844 368.460938 835.613281 351.4375 856.535156 351.4375 C 877.460938 351.4375 894.480469 368.460938 894.480469 389.382812 C 894.480469 399.679688 890.28125 409.5 882.894531 416.644531 C 884.378906 418.953125 887.359375 423.402344 890.121094 427.445312 L 891.5625 429.558594 Z M 877.449219 438.71875 "/></svg>
+  </a>
+  <div class="nav-ctas">
+    <a href="#waitlist-brands" class="btn btn-outline">For Brands</a>
+    <a href="#waitlist-races" class="btn btn-dark">For Races</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-tag"><span class="dot"></span>Coming Soon — Join the Waitlist</div>
+  <h1>Turn your race into a<br/><strong>revenue engine.</strong></h1>
+  <p class="hero-sub">RaceHQ combines event registration with a sponsor marketplace — so race directors earn beyond the entry fee.</p>
+  <div class="hero-ctas">
+    <a href="#waitlist-races" class="btn btn-yellow">For Races →</a>
+    <a href="#waitlist-brands" class="btn btn-ghost">For Brands</a>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker-item"><span class="ticker-dot"></span>Event Registration</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Affiliate Deals</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Sponsor Hub Pages</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Discount Codes</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Revenue Share</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Brand Partnerships</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Participant Data</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Automated Payouts</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Real-time Analytics</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Race Management</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Event Registration</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Affiliate Deals</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Sponsor Hub Pages</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Discount Codes</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Revenue Share</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Brand Partnerships</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Participant Data</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Automated Payouts</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Real-time Analytics</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Race Management</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<div class="split" id="registration">
+  <div class="text">
+    <span class="section-label">Event Registration</span>
+    <h2>Everything you need to run a great race.</h2>
+    <p class="lead">Simple, fast registration built for running events. Set up in minutes. Participants register in seconds.</p>
+    <ul class="points">
+      <li><span class="check">✓</span>Custom event pages with category &amp; wave management</li>
+      <li><span class="check">✓</span>Secure payments with instant payouts</li>
+      <li><span class="check">✓</span>Waitlists, transfers &amp; deferrals built in</li>
+      <li><span class="check">✓</span>Race-day check-in, bib assignment &amp; live dashboards</li>
+      <li><span class="check">✓</span>Automated confirmation &amp; reminder emails</li>
+    </ul>
+    <a href="#waitlist-races" class="btn btn-dark">Get Early Access →</a>
+  </div>
+  <div class="visual">
+    <div class="card">
+      <div class="card-bar">
+        <div class="cd" style="background:#ff5f57"></div>
+        <div class="cd" style="background:#ffbd2e"></div>
+        <div class="cd" style="background:#28c840"></div>
+        <div class="card-url">racehq.io/events/city-marathon</div>
+      </div>
+      <div class="card-body">
+        <div class="event-row">
+          <div class="event-badge">🏙️</div>
+          <div>
+            <div class="event-name">City Marathon 2025</div>
+            <div class="event-meta">Registration open · 14 weeks to race day</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-val">3,241</div><div class="stat-lbl">Registered</div></div>
+          <div class="stat-box"><div class="stat-val">759</div><div class="stat-lbl">Remaining</div></div>
+          <div class="stat-box"><div class="stat-val">£48k</div><div class="stat-lbl">Revenue</div></div>
+        </div>
+        <div>
+          <div class="prog-hd"><span>Capacity</span><span>81%</span></div>
+          <div class="prog-bar"><div class="prog-fill"></div></div>
+        </div>
+        <div class="entry"><div class="av">SJ</div><div class="en">Sarah Johnson</div><div class="et">Full · Wave A</div><div class="ep">Paid</div></div>
+        <div class="entry"><div class="av">MT</div><div class="en">Marcus Torres</div><div class="et">Half · Wave B</div><div class="ep">Paid</div></div>
+        <div class="entry"><div class="av">EK</div><div class="en">Emma King</div><div class="et">Full · Wave A</div><div class="ep">Paid</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="split flip" id="sponsorship">
+  <div class="text">
+    <span class="section-label">Sponsor Hub</span>
+    <h2>Your participants. Your new revenue stream.</h2>
+    <p class="lead">Every event gets a branded Sponsor Hub. Your participants find deals. You earn from every conversion — automatically.</p>
+    <ul class="points">
+      <li><span class="check">✓</span>Branded sponsor hub created with every event</li>
+      <li><span class="check">✓</span>Affiliate links, discount codes, or flat-fee deals</li>
+      <li><span class="check">✓</span>Brands matched to your event audience</li>
+      <li><span class="check">✓</span>Automatic commission tracking &amp; payouts</li>
+    </ul>
+    <a href="#waitlist-races" class="btn btn-yellow2">See How It Works →</a>
+  </div>
+  <div class="visual">
+    <div class="card">
+      <div class="card-bar">
+        <div class="cd" style="background:#ff5f57"></div>
+        <div class="cd" style="background:#ffbd2e"></div>
+        <div class="cd" style="background:#28c840"></div>
+        <div class="card-url">racehq.io/events/city-marathon/sponsors</div>
+      </div>
+      <div class="card-body">
+        <div class="hub-lbl">Exclusive Deals for Your Participants</div>
+        <div class="deal"><div class="deal-icon">👟</div><div style="flex:1"><div class="deal-name">TrailBrand Pro</div><div class="deal-desc">20% off race-day footwear · code CITY20</div></div><div class="deal-cta">Claim →</div></div>
+        <div class="deal"><div class="deal-icon">🧴</div><div style="flex:1"><div class="deal-name">FuelUp Nutrition</div><div class="deal-desc">15% off gels &amp; hydration</div></div><div class="deal-cta">Claim →</div></div>
+        <div class="deal"><div class="deal-icon">⌚</div><div style="flex:1"><div class="deal-name">PaceWatch Co.</div><div class="deal-desc">$30 off GPS running watches</div></div><div class="deal-cta">Claim →</div></div>
+        <div class="deal"><div class="deal-icon">✈️</div><div style="flex:1"><div class="deal-name">RaceTravel</div><div class="deal-desc">10% off race weekend hotels</div></div><div class="deal-cta">Claim →</div></div>
+        <div class="earn-box">
+          <div><div class="hub-lbl" style="margin:0">Sponsor Earnings This Month</div><div class="earn-lbl">4 active partners</div></div>
+          <div class="earn-val">$2,140</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-band">
+  <div class="stats-grid">
+    <div class="stat-block"><div class="stat-big"><em>12M</em>+</div><div class="stat-lbl2">Endurance participants globally</div></div>
+    <div class="stat-block"><div class="stat-big">$<em>4B</em>+</div><div class="stat-lbl2">Endurance sports market</div></div>
+    <div class="stat-block"><div class="stat-big"><em>78</em>%</div><div class="stat-lbl2">Race directors without sponsor revenue</div></div>
+    <div class="stat-block"><div class="stat-big"><em>3</em>x</div><div class="stat-lbl2">Higher conversion vs social ads</div></div>
+  </div>
+</div>
+
+<section class="audiences">
+  <div style="text-align:center;margin-bottom:3rem">
+    <span class="section-label">Built for both sides</span>
+    <h2>One platform. Two audiences.</h2>
+  </div>
+  <div class="aud-grid">
+    <div class="aud-card aud-light">
+      <div class="aud-icon">🏁</div>
+      <h3>For Races</h3>
+      <p>Register participants, manage your event, and earn from brand deals — all in one place.</p>
+      <ul class="aud-points">
+        <li>Full event registration platform included</li>
+        <li>Branded Sponsor Hub page per event</li>
+        <li>Choose your own brand partners &amp; deal types</li>
+        <li>Automatic commission tracking and payouts</li>
+      </ul>
+      <a href="#waitlist-races" class="btn btn-yellow2">Get Early Access →</a>
+    </div>
+    <div class="aud-card aud-dark">
+      <div class="aud-icon">🤝</div>
+      <h3>For Brands</h3>
+      <p>Reach purchase-ready endurance athletes at exactly the moment they're buying.</p>
+      <ul class="aud-points">
+        <li>Access to verified race participant audiences</li>
+        <li>Affiliate, discount code, or flat-fee options</li>
+        <li>Matched to events by sport, size &amp; location</li>
+        <li>Real-time performance tracking &amp; ROI reporting</li>
+      </ul>
+      <a href="#waitlist-brands" class="btn btn-violet">For Brands →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<section class="waitlist">
+  <div class="waitlist-inner">
+    <div class="waitlist-hd">
+      <span class="section-label">Join the Waitlist</span>
+      <h2>Be first on the start line.</h2>
+      <p>RaceHQ is launching soon. Join now for early access and founding pricing.</p>
+    </div>
+    <div class="waitlist-grid">
+      <div class="wcard wcard-races" id="waitlist-races">
+        <h3>For Races</h3>
+        <p>Early access, founding pricing, and first pick of brand partners before launch.</p>
+        <form name="directors-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-directors">
+          <input type="hidden" name="form-name" value="directors-waitlist"/>
+          <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
+          <div class="form-row">
+            <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
+            <label>Email<input type="email" name="email" placeholder="you@email.com" required/></label>
+          </div>
+          <label>Event Name<input type="text" name="event" placeholder="e.g. Bristol Half Marathon"/></label>
+          <label>Annual participants
+            <select name="size">
+              <option value="">Select range</option>
+              <option>Under 500</option>
+              <option>500 – 2,000</option>
+              <option>2,000 – 10,000</option>
+              <option>10,000+</option>
+            </select>
+          </label>
+          <button type="submit" class="btn-submit-races">For Races →</button>
+          <p class="form-note">Free to join. No credit card required.</p>
+        </form>
+        <div class="form-success" id="success-directors">
+          <div class="check">🏁</div>
+          <h3>You're on the list!</h3>
+          <p>We'll be in touch with early access details soon.</p>
+        </div>
+      </div>
+      <div class="wcard wcard-brands" id="waitlist-brands">
+        <h3>For Brands</h3>
+        <p>Early access to the brand dashboard and first chance to connect with race directors.</p>
+        <form name="brands-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-brands">
+          <input type="hidden" name="form-name" value="brands-waitlist"/>
+          <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
+          <div class="form-row">
+            <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
+            <label>Email<input type="email" name="email" placeholder="you@brand.com" required/></label>
+          </div>
+          <label>Brand / Company<input type="text" name="brand" placeholder="e.g. TrailBrand Pro" required/></label>
+          <label>Product category
+            <select name="category">
+              <option value="">Select category</option>
+              <option>Footwear &amp; Apparel</option>
+              <option>Nutrition &amp; Supplements</option>
+              <option>Wearables &amp; Tech</option>
+              <option>Travel &amp; Accommodation</option>
+              <option>Recovery &amp; Wellness</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <button type="submit" class="btn-submit-brands">For Brands →</button>
+          <p class="form-note">Free to list. We'll be in touch to discuss terms.</p>
+        </form>
+        <div class="form-success" id="success-brands">
+          <div class="check">🤝</div>
+          <h3>Great — we'll be in touch!</h3>
+          <p>Our team will reach out to discuss partnership opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="#hero">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 449.839844 393.894531 L 461.738281 393.894531 C 468.296875 393.894531 473.632812 388.554688 473.632812 381.996094 C 473.632812 375.4375 468.296875 370.101562 461.738281 370.101562 L 449.839844 370 Z M 474.695312 421.058594 L 485.65625 421.058594 L 469.464844 405.292969 L 472.601562 403.71875 C 480.882812 399.558594 486.027344 391.234375 486.027344 381.996094 C 486.027344 368.617188 475.140625 357.722656 461.761719 357.707031 L 437.449219 357.707031 L 437.449219 421.058594 L 444.839844 421.058594 L 444.839844 364.960938 L 461.707031 365.101562 C 471.054688 365.101562 478.632812 372.679688 478.632812 381.996094 C 478.632812 391.3125 471.054688 398.894531 461.738281 398.894531 L 452.929688 398.894531 Z M 497.957031 426.058594 L 472.597656 426.058594 L 449.839844 402.886719 L 449.839844 426.058594 L 432.449219 426.058594 L 432.449219 352.707031 L 461.765625 352.707031 C 477.902344 352.726562 491.027344 365.863281 491.027344 381.996094 C 491.027344 391.980469 486.050781 401.074219 477.832031 406.464844 Z M 497.957031 426.058594 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 506.582031 423.375 L 520.121094 423.375 L 543.023438 381.28125 L 567.050781 423.375 L 581.496094 423.375 L 542.761719 354.820312 Z M 506.582031 423.375 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 568.503906 420.878906 L 577.210938 420.878906 L 542.835938 360.035156 L 510.730469 420.878906 L 518.636719 420.878906 L 542.972656 376.144531 Z M 585.78125 425.878906 L 565.601562 425.878906 L 543.074219 386.414062 L 521.609375 425.878906 L 502.4375 425.878906 L 542.6875 349.605469 Z M 585.78125 425.878906 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 616.257812 412.570312 C 603.371094 412.570312 592.886719 402.085938 592.886719 389.195312 C 592.886719 376.308594 603.371094 365.824219 616.257812 365.824219 C 622.222656 365.824219 627.902344 368.070312 632.25 372.152344 L 640.730469 363.113281 C 634.078125 356.871094 625.386719 353.429688 616.257812 353.429688 C 596.535156 353.429688 580.488281 369.472656 580.488281 389.195312 C 580.488281 408.917969 596.535156 424.964844 616.257812 424.964844 C 625.390625 424.964844 634.082031 421.523438 640.738281 415.273438 L 632.253906 406.238281 C 627.90625 410.320312 622.222656 412.570312 616.257812 412.570312 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 616.257812 355.929688 C 597.914062 355.929688 582.988281 370.851562 582.988281 389.195312 C 582.988281 407.539062 597.914062 422.464844 616.257812 422.464844 C 623.910156 422.464844 631.238281 419.863281 637.140625 415.09375 L 632.058594 409.683594 C 627.546875 413.171875 622.023438 415.066406 616.257812 415.066406 C 601.992188 415.066406 590.386719 403.464844 590.386719 389.195312 C 590.386719 374.929688 601.992188 363.324219 616.257812 363.324219 C 622.019531 363.324219 627.542969 365.21875 632.054688 368.707031 L 637.132812 363.292969 C 631.230469 358.527344 623.910156 355.929688 616.257812 355.929688 M 616.257812 427.464844 C 595.15625 427.464844 577.988281 410.296875 577.988281 389.195312 C 577.988281 368.097656 595.15625 350.929688 616.257812 350.929688 C 626.023438 350.929688 635.320312 354.609375 642.441406 361.289062 L 644.265625 363 L 632.359375 375.683594 L 630.535156 373.972656 C 626.65625 370.332031 621.582031 368.324219 616.257812 368.324219 C 604.746094 368.324219 595.386719 377.6875 595.386719 389.195312 C 595.386719 400.707031 604.746094 410.066406 616.257812 410.066406 C 621.585938 410.066406 626.660156 408.058594 630.539062 404.414062 L 632.363281 402.703125 L 644.269531 415.386719 L 642.449219 417.097656 C 635.328125 423.78125 626.027344 427.464844 616.257812 427.464844 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 794.886719 385.226562 L 762.261719 385.226562 L 762.261719 354.84375 L 748.507812 354.84375 L 748.507812 423.195312 L 762.261719 423.195312 L 762.261719 398.980469 L 794.886719 398.980469 L 794.886719 423.195312 L 808.640625 423.195312 L 808.640625 354.84375 L 794.886719 354.84375 Z M 794.886719 385.226562 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 797.386719 420.695312 L 806.140625 420.695312 L 806.140625 357.34375 L 797.386719 357.34375 L 797.386719 387.726562 L 759.761719 387.726562 L 759.761719 357.34375 L 751.007812 357.34375 L 751.007812 420.695312 L 759.761719 420.695312 L 759.761719 396.476562 L 797.386719 396.476562 Z M 811.140625 425.695312 L 792.386719 425.695312 L 792.386719 401.476562 L 764.761719 401.476562 L 764.761719 425.695312 L 746.007812 425.695312 L 746.007812 352.34375 L 764.761719 352.34375 L 764.761719 382.726562 L 792.386719 382.726562 L 792.386719 352.34375 L 811.140625 352.34375 Z M 811.140625 425.695312 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 654.054688 411.238281 L 654.054688 423.375 L 701.3125 423.375 L 701.3125 411.238281 L 666.191406 411.238281 L 666.191406 398.054688 L 694.53125 398.054688 L 694.53125 385.917969 L 666.191406 385.917969 L 666.191406 366.738281 L 701.3125 366.738281 L 701.3125 354.601562 L 654.054688 354.601562 Z M 654.054688 411.238281 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 656.554688 420.878906 L 698.816406 420.878906 L 698.816406 413.738281 L 663.695312 413.738281 L 663.695312 395.554688 L 692.03125 395.554688 L 692.03125 388.417969 L 663.695312 388.417969 L 663.695312 364.238281 L 698.816406 364.238281 L 698.816406 357.101562 L 656.554688 357.101562 Z M 703.816406 425.878906 L 651.554688 425.878906 L 651.554688 352.101562 L 703.816406 352.101562 L 703.816406 369.238281 L 668.695312 369.238281 L 668.695312 383.417969 L 697.03125 383.417969 L 697.03125 400.554688 L 668.695312 400.554688 L 668.695312 408.738281 L 703.816406 408.738281 Z M 703.816406 425.878906 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 832.90625 389.382812 C 832.90625 376.351562 843.507812 365.753906 856.535156 365.753906 C 869.566406 365.753906 880.167969 376.351562 880.167969 389.382812 C 880.167969 402.414062 869.566406 413.011719 856.535156 413.011719 C 843.507812 413.011719 832.90625 402.414062 832.90625 389.382812 M 888.054688 428.855469 C 888.054688 428.855469 880.128906 417.246094 879.703125 416.175781 C 887.214844 409.671875 891.980469 400.078125 891.980469 389.382812 C 891.980469 369.839844 876.082031 353.9375 856.535156 353.9375 C 836.992188 353.9375 821.089844 369.839844 821.089844 389.382812 C 821.089844 408.929688 836.992188 424.828125 856.535156 424.828125 C 861.121094 424.828125 865.496094 423.945312 869.519531 422.355469 C 870.109375 423.574219 878.132812 435.292969 878.132812 435.292969 Z M 888.054688 428.855469 "/>
+<path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 856.535156 368.253906 C 844.882812 368.253906 835.40625 377.734375 835.40625 389.382812 C 835.40625 401.035156 844.882812 410.511719 856.535156 410.511719 C 868.1875 410.511719 877.667969 401.035156 877.667969 389.382812 C 877.667969 377.734375 868.1875 368.253906 856.535156 368.253906 M 856.535156 415.511719 C 842.128906 415.511719 830.40625 403.792969 830.40625 389.382812 C 830.40625 374.976562 842.128906 363.253906 856.535156 363.253906 C 870.941406 363.253906 882.667969 374.976562 882.667969 389.382812 C 882.667969 403.792969 870.941406 415.511719 856.535156 415.511719 M 870.765625 419.175781 L 871.773438 421.269531 C 872.148438 421.988281 875.441406 426.910156 878.820312 431.867188 L 884.550781 428.148438 C 880.105469 421.613281 877.695312 417.898438 877.378906 417.101562 L 876.722656 415.453125 L 878.066406 414.289062 C 885.320312 408.003906 889.480469 398.929688 889.480469 389.382812 C 889.480469 371.214844 874.703125 356.4375 856.535156 356.4375 C 838.371094 356.4375 823.589844 371.214844 823.589844 389.382812 C 823.589844 407.550781 838.371094 422.328125 856.535156 422.328125 C 860.683594 422.328125 864.742188 421.554688 868.601562 420.03125 Z M 877.449219 438.71875 L 876.070312 436.707031 C 874.207031 433.988281 870.429688 428.441406 868.464844 425.398438 C 864.613281 426.679688 860.613281 427.328125 856.535156 427.328125 C 835.613281 427.328125 818.589844 410.304688 818.589844 389.382812 C 818.589844 368.460938 835.613281 351.4375 856.535156 351.4375 C 877.460938 351.4375 894.480469 368.460938 894.480469 389.382812 C 894.480469 399.679688 890.28125 409.5 882.894531 416.644531 C 884.378906 418.953125 887.359375 423.402344 890.121094 427.445312 L 891.5625 429.558594 Z M 877.449219 438.71875 "/></svg>
+    </a>
+    <ul class="footer-links">
+      <li><a href="#registration">Registration</a></li>
+      <li><a href="#sponsorship">Sponsor Hub</a></li>
+      <li><a href="#waitlist-races">For Races</a></li>
+      <li><a href="#waitlist-brands">For Brands</a></li>
+      <li><a href="mailto:hello@racehq.io">hello@racehq.io</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 RaceHQ Ltd.</span>
+  </div>
+</footer>
+
+<script>
+async function handleForm(formId, successId) {
+  var form = document.getElementById(formId);
+  var success = document.getElementById(successId);
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    try {
+      var res = await fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+      if (res.ok) { form.style.display='none'; success.style.display='block'; }
+      else { alert('Something went wrong. Please email hello@racehq.io'); }
+    } catch(err) { alert('Something went wrong. Please email hello@racehq.io'); }
+  });
+}
+handleForm('form-directors','success-directors');
+handleForm('form-brands','success-brands');
+</script>
+
+</body>
+</html>
