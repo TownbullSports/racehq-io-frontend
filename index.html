@@ -3,135 +3,228 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>RaceHQ</title>
+<title>RaceHQ — Register. Connect. Earn.</title>
+<meta name="description" content="RaceHQ combines event registration with a sponsor marketplace — so race directors earn beyond the entry fee."/>
 <style>
-body { margin: 0; font-family: Helvetica Neue, Arial, sans-serif; background: #fff; color: #1F053B; }
-nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba(255,255,255,0.95); border-bottom: 1px solid #ECEDED; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; z-index: 100; }
-.logo svg { height: 24px; width: auto; display: block; }
-.logo svg path { fill: #1F053B !important; }
-.nav-ctas { display: flex; gap: 0.75rem; }
-.btn { padding: 0.55rem 1.25rem; border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; }
-.btn-outline { background: transparent; color: #1F053B; border: 1.5px solid #ECEDED; }
-.btn-dark { background: #1F053B; color: #fff; }
-#hero { min-height: 100vh; background: #1F053B; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 2rem 4rem; position: relative; overflow: hidden; }
-#hero::before { content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(176,38,255,0.2) 0%, transparent 70%); pointer-events: none; }
-#hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, #fff); pointer-events: none; }
-.hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(242,207,0,0.1); border: 1px solid rgba(242,207,0,0.25); border-radius: 100px; padding: 0.3rem 1rem; font-size: 0.75rem; font-weight: 500; color: #F2CF00; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2rem; position: relative; z-index: 2; }
-.dot { width: 6px; height: 6px; border-radius: 50%; background: #F2CF00; }
-h1 { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.5rem; position: relative; z-index: 2; }
-h1 strong { color: #F2CF00; }
-.hero-sub { font-size: 1.15rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; z-index: 2; }
-.hero-ctas { display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 2; }
-.btn-yellow { background: #F2CF00; color: #000; padding: 0.85rem 2rem; border-radius: 10px; font-size: 1rem; }
-.btn-ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 0.85rem 2rem; border-radius: 10px; font-size: 1rem; }
-.ticker-wrap { width: 100%; overflow: hidden; background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.08); padding: 0.9rem 0; margin-top: 3rem; position: relative; z-index: 2; }
-.ticker { display: flex; gap: 3rem; width: max-content; animation: tickScroll 28s linear infinite; }
-.ticker-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.45); white-space: nowrap; }
-.ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: #F2CF00; flex-shrink: 0; }
-@keyframes tickScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-main { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-.section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #B026FF; display: block; margin-bottom: 1rem; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.025em; color: #1F053B; margin-bottom: 1rem; }
-.lead { font-size: 1.05rem; font-weight: 300; color: #666C6D; line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-.split.flip .visual { order: -1; }
-.points { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 0.7rem; }
-.points li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: #666C6D; }
-.check { width: 20px; height: 20px; border-radius: 50%; background: #F2CF00; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; font-weight: 700; color: #000; margin-top: 1px; }
-.card { background: #fff; border: 1px solid #ECEDED; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
-.card-bar { background: #f6f9fc; border-bottom: 1px solid #ECEDED; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
-.cd { width: 8px; height: 8px; border-radius: 50%; }
-.card-url { margin: 0 auto; font-size: 0.7rem; color: #8898aa; background: #ECEDED; padding: 0.2rem 0.75rem; border-radius: 4px; }
-.card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
-.event-row { display: flex; align-items: center; gap: 0.75rem; }
-.event-badge { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg,#F2CF00,#e8b800); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-.event-name { font-size: 0.9rem; font-weight: 700; color: #1F053B; }
-.event-meta { font-size: 0.72rem; color: #8898aa; }
-.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
-.stat-box { background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 8px; padding: 0.6rem 0.75rem; }
-.stat-val { font-size: 1rem; font-weight: 700; color: #1F053B; }
-.stat-lbl { font-size: 0.65rem; color: #8898aa; margin-top: 0.2rem; }
-.prog-hd { display: flex; justify-content: space-between; font-size: 0.72rem; color: #8898aa; margin-bottom: 0.3rem; }
-.prog-bar { height: 6px; background: #ECEDED; border-radius: 3px; overflow: hidden; }
-.prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,#F2CF00,#e8b800); width: 73%; }
-.entry { display: flex; align-items: center; gap: 0.6rem; background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 7px; padding: 0.5rem 0.7rem; }
-.av { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg,#B026FF,#FF12F0); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0; }
-.en { font-size: 0.78rem; font-weight: 500; color: #1F053B; flex: 1; }
-.et { font-size: 0.68rem; color: #8898aa; }
-.ep { font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(242,207,0,0.15); color: #7a6800; }
-.hub-lbl { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8898aa; }
-.deal { display: flex; align-items: center; gap: 0.65rem; background: #f6f9fc; border: 1px solid #ECEDED; border-radius: 8px; padding: 0.6rem 0.75rem; }
-.deal-icon { width: 30px; height: 30px; border-radius: 6px; background: #ECEDED; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
-.deal-name { font-size: 0.78rem; font-weight: 500; color: #1F053B; flex: 1; }
-.deal-desc { font-size: 0.68rem; color: #8898aa; }
-.deal-cta { font-size: 0.68rem; font-weight: 700; color: #B026FF; }
-.earn-box { background: rgba(242,207,0,0.08); border: 1px solid rgba(242,207,0,0.25); border-radius: 8px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
-.earn-lbl { font-size: 0.72rem; color: #666C6D; }
-.earn-val { font-size: 1.2rem; font-weight: 700; color: #1F053B; }
-.divider { border: none; border-top: 1px solid #ECEDED; margin: 0; }
-.stats-band { background: #1F053B; padding: 4rem 2rem; }
-.stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
-.stat-block { padding: 1.5rem; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; }
-.stat-block:last-child { border-right: none; }
-.stat-big { font-size: clamp(2rem,4vw,2.75rem); font-weight: 700; letter-spacing: -0.03em; color: #fff; line-height: 1; margin-bottom: 0.4rem; }
-.stat-big em { font-style: normal; color: #F2CF00; }
-.stat-lbl2 { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
-.audiences { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-.aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
-.aud-card { border-radius: 16px; padding: 2.5rem; }
-.aud-light { background: #f6f9fc; border: 1px solid #ECEDED; }
-.aud-dark { background: #1F053B; position: relative; overflow: hidden; }
-.aud-dark::after { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(ellipse,rgba(176,38,255,0.3),transparent 70%); pointer-events: none; }
-.aud-icon { font-size: 2rem; margin-bottom: 1.25rem; }
-.aud-card h3 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: #1F053B; margin-bottom: 0.75rem; }
+:root {
+  --purple:  #1F053B;
+  --yellow:  #F2CF00;
+  --white:   #ffffff;
+  --violet:  #B026FF;
+  --magenta: #FF12F0;
+  --grey-lt: #ECEDED;
+  --grey-md: #666C6D;
+  --black:   #000000;
+  --ink-dim: #8898aa;
+  --surface: #f6f9fc;
+  --border:  #e6ebf1;
+  --font:    "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  --max:     1120px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #fff; color: var(--purple); font-family: var(--font); font-weight: 400; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.5rem,5vw,3rem); z-index: 900; }
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo svg { height: 22px; width: auto; display: block; }
+.nav-logo svg path { fill: var(--purple) !important; }
+.nav-ctas { display: flex; gap: 0.6rem; }
+.btn { display: inline-flex; align-items: center; padding: 0.55rem 1.25rem; border-radius: 8px; font-family: var(--font); font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: all 0.18s; text-decoration: none; border: none; white-space: nowrap; }
+.btn-outline { background: transparent; color: var(--purple); border: 1.5px solid var(--border); }
+.btn-outline:hover { border-color: var(--purple); }
+.btn-dark { background: var(--purple); color: #fff; }
+.btn-dark:hover { background: #2d0850; box-shadow: 0 4px 14px rgba(31,5,59,0.3); }
+.btn-yellow { background: var(--yellow); color: var(--black); }
+.btn-yellow:hover { background: #f5d800; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(242,207,0,0.35); }
+.btn-violet { background: var(--violet); color: #fff; }
+.btn-violet:hover { background: #9a00e0; transform: translateY(-1px); }
+.btn-lg { padding: 0.85rem 2rem; font-size: 1rem; border-radius: 10px; }
+.btn-xl { padding: 1rem 2.4rem; font-size: 1.05rem; border-radius: 10px; }
+
+/* HERO */
+#hero { min-height: 100vh; background: linear-gradient(160deg, #0d0120 0%, #1F053B 45%, #2a0a4a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 110px clamp(1.5rem,5vw,3rem) 0; position: relative; overflow: hidden; }
+#hero::before { content: ''; position: absolute; top: 25%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(176,38,255,0.22) 0%, rgba(242,207,0,0.08) 45%, transparent 75%); pointer-events: none; z-index: 1; }
+#hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, transparent, #fff); pointer-events: none; z-index: 2; }
+
+/* TOPO SVG */
+.hero-topo { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.topo-trace { stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: traceIn 4s ease-out 0.8s forwards; }
+.topo-trace-2 { stroke-dasharray: 1800; stroke-dashoffset: 1800; animation: traceIn 3.5s ease-out 1.2s forwards; }
+.topo-trace-3 { stroke-dasharray: 1500; stroke-dashoffset: 1500; animation: traceIn 3s ease-out 1.6s forwards; }
+@keyframes traceIn { to { stroke-dashoffset: 0; } }
+.topo-pulse { animation: topoPulse 6s ease-in-out infinite alternate; }
+@keyframes topoPulse { from { opacity: 0.35; } to { opacity: 0.65; } }
+
+/* HERO CONTENT */
+.hero-inner { position: relative; z-index: 3; max-width: 820px; }
+.hero-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+.hero-label span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); animation: pulseAnim 2s infinite; }
+@keyframes pulseAnim { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+h1 { font-size: clamp(3rem,8vw,6.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; position: relative; z-index: 3; }
+h1 em { font-style: normal; color: var(--yellow); }
+.hero-sub { font-size: clamp(1.05rem,2vw,1.25rem); font-weight: 300; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 2.75rem; line-height: 1.7; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; position: relative; z-index: 3; }
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; position: relative; z-index: 3; }
+.hero-ctas .btn-outline { color: #fff; border-color: rgba(255,255,255,0.3); }
+.hero-ctas .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+.hero-note { margin-top: 1.25rem; font-size: 0.8rem; color: rgba(255,255,255,0.45); opacity: 0; animation: fadeUp 0.6s 0.65s forwards; position: relative; z-index: 3; }
+.hero-note a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 3px; }
+.hero-note a:hover { color: #fff; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* EVENT SCROLLER */
+.event-scroller { width: 100%; margin-top: 4rem; position: relative; z-index: 3; overflow: hidden; display: flex; flex-direction: column; gap: 0; padding-bottom: 0; }
+.scroller-label { text-align: center; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; }
+.scroller-row { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+.scroller-track { display: flex; gap: 0.75rem; width: max-content; animation: scrollLeft 40s linear infinite; }
+@keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ec { position: relative; width: 200px; height: 130px; border-radius: 12px; overflow: hidden; flex-shrink: 0; text-decoration: none; display: block; transition: transform 0.2s; }
+.ec:hover { transform: scale(1.03); }
+.ec-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.3s; }
+.ec:hover .ec-img { transform: scale(1.06); }
+.ec::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(31,5,59,0.88) 0%, rgba(31,5,59,0.2) 55%, transparent 100%); }
+.ec-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.6rem 0.75rem; z-index: 2; display: flex; flex-direction: column; gap: 0.1rem; }
+.ec-name { font-size: 0.78rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.ec-city { font-size: 0.65rem; font-weight: 400; color: rgba(255,255,255,0.65); }
+.ec-date { font-size: 0.62rem; font-weight: 700; color: var(--yellow); letter-spacing: 0.04em; }
+
+/* SHARED */
+section { padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem); }
+.container { max-width: var(--max); margin: 0 auto; }
+.eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); display: block; margin-bottom: 1rem; }
+h2 { font-size: clamp(2rem,4.5vw,3.2rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; color: var(--purple); margin-bottom: 1.25rem; }
+h2 em { font-style: normal; color: var(--yellow); }
+.lead { font-size: 1.05rem; font-weight: 300; color: var(--grey-md); line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+hr.div { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* FEATURE ROWS */
+.feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,8vw,7rem); align-items: center; padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem); max-width: calc(var(--max) + 4rem); margin: 0 auto; }
+.feature-row.flip .feature-visual { order: -1; }
+.feature-text h2 { margin-bottom: 1rem; }
+.feature-points { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+.feature-points li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--grey-md); line-height: 1.55; }
+.chk { width: 18px; height: 18px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%230d0d0d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+
+/* PRODUCT CARD */
+.product-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.1); }
+.pc-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.pcd { width: 8px; height: 8px; border-radius: 50%; }
+.pc-url { margin: 0 auto; font-size: 0.7rem; color: var(--ink-dim); background: var(--border); padding: 0.2rem 0.75rem; border-radius: 4px; }
+.pc-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.pc-event-row { display: flex; align-items: center; gap: 0.75rem; }
+.pc-badge { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg,var(--yellow),#e8b800); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.pc-event-name { font-size: 0.9rem; font-weight: 700; color: var(--purple); }
+.pc-event-meta { font-size: 0.72rem; color: var(--ink-dim); }
+.pc-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; }
+.pc-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.75rem; }
+.pc-stat-val { font-size: 1rem; font-weight: 700; color: var(--purple); line-height: 1; }
+.pc-stat-lbl { font-size: 0.65rem; color: var(--ink-dim); margin-top: 0.2rem; }
+.pc-prog-hd { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ink-dim); margin-bottom: 0.35rem; }
+.pc-prog-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.pc-prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--yellow),#e8b800); width: 73%; }
+.pc-entry { display: flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 0.5rem 0.7rem; }
+.pc-av { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg,var(--violet),var(--magenta)); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+.pc-en { font-size: 0.78rem; font-weight: 500; color: var(--purple); flex: 1; }
+.pc-et { font-size: 0.68rem; color: var(--ink-dim); }
+.pc-ep { font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(242,207,0,0.15); color: #7a6800; }
+.pc-hub-lbl { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); }
+.pc-deal { display: flex; align-items: center; gap: 0.65rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.75rem; }
+.pc-deal:first-of-type { border-color: rgba(176,38,255,0.25); }
+.phdl { width: 30px; height: 30px; border-radius: 6px; background: var(--grey-lt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.phdi { flex: 1; }
+.phdn { font-size: 0.78rem; font-weight: 500; color: var(--purple); }
+.phdd { font-size: 0.68rem; color: var(--ink-dim); }
+.phdcta { font-size: 0.68rem; font-weight: 700; color: var(--violet); }
+.pc-earn { background: rgba(242,207,0,0.08); border: 1px solid rgba(242,207,0,0.25); border-radius: 8px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+.pc-earn-lbl { font-size: 0.72rem; color: var(--grey-md); }
+.pc-earn-val { font-size: 1.2rem; font-weight: 700; color: var(--purple); }
+
+/* SOCIAL PROOF */
+#social { background: var(--purple); padding: clamp(4rem,8vw,6rem) clamp(1.5rem,5vw,3rem); }
+.social-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 2.5rem; }
+.social-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; }
+.social-card { background: rgba(255,255,255,0.05); padding: 2rem; }
+.social-quote { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 1.25rem; }
+.social-quote::before { content: 'C'; }
+.social-quote::after  { content: 'D'; }
+.social-name { font-size: 0.82rem; font-weight: 700; color: #fff; }
+.social-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+/* AUDIENCES */
+#audiences { background: #fff; }
+.audiences-header { text-align: center; margin-bottom: 3rem; }
+.aud-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: var(--max); margin: 0 auto; }
+.aud-card { border-radius: 18px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.aud-light { background: var(--surface); border: 1px solid var(--border); }
+.aud-dark { background: var(--purple); position: relative; overflow: hidden; }
+.aud-dark::after { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(ellipse,rgba(176,38,255,0.3),transparent 70%); pointer-events: none; }
+.aud-icon { font-size: 2rem; }
+.aud-card h3 { font-size: clamp(1.5rem,3vw,2rem); font-weight: 700; letter-spacing: -0.02em; color: var(--purple); line-height: 1.1; }
 .aud-dark h3 { color: #fff; }
-.aud-card p { font-size: 0.95rem; font-weight: 300; color: #666C6D; line-height: 1.7; margin-bottom: 1.75rem; }
-.aud-dark p { color: rgba(255,255,255,0.5); }
-.aud-points { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 0.55rem; }
-.aud-points li { font-size: 0.88rem; color: #666C6D; display: flex; align-items: center; gap: 0.6rem; }
-.aud-points li::before { content: "→"; color: #F2CF00; font-weight: 700; }
-.aud-dark .aud-points li { color: rgba(255,255,255,0.55); }
-.btn-yellow2 { background: #F2CF00; color: #000; padding: 0.75rem 1.75rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-block; }
-.btn-violet { background: #B026FF; color: #fff; padding: 0.75rem 1.75rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-block; }
-.waitlist { background: #ECEDED; padding: 5rem 2rem; }
-.waitlist-inner { max-width: 800px; margin: 0 auto; }
-.waitlist-hd { text-align: center; margin-bottom: 3.5rem; }
-.waitlist-hd h2 { margin-bottom: 0.75rem; }
-.waitlist-hd p { font-size: 1rem; font-weight: 300; color: #666C6D; }
-.waitlist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.wcard { background: #fff; border: 1px solid #ECEDED; border-radius: 16px; padding: 2.25rem; position: relative; overflow: hidden; }
+.aud-card p { font-size: 0.95rem; font-weight: 300; color: var(--grey-md); line-height: 1.7; max-width: 380px; }
+.aud-dark p { color: rgba(255,255,255,0.55); }
+.aud-points { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.aud-points li { font-size: 0.88rem; color: var(--grey-md); display: flex; align-items: center; gap: 0.6rem; }
+.aud-points li::before { content: "→"; color: var(--yellow); font-weight: 700; }
+.aud-dark .aud-points li { color: rgba(255,255,255,0.6); }
+
+/* WAITLIST */
+#waitlist { background: var(--grey-lt); padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem); }
+.waitlist-header { text-align: center; max-width: 540px; margin: 0 auto 3.5rem; }
+.waitlist-header h2 { margin-bottom: 0.75rem; }
+.waitlist-header p { font-size: 1rem; font-weight: 300; color: var(--grey-md); }
+.waitlist-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 820px; margin: 0 auto; }
+.wcard { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 2.25rem; position: relative; overflow: hidden; }
 .wcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.wcard-races::before { background: #F2CF00; }
-.wcard-brands::before { background: linear-gradient(90deg,#B026FF,#FF12F0); }
-.wcard h3 { font-size: 1.15rem; font-weight: 700; color: #1F053B; margin-bottom: 0.4rem; }
-.wcard p { font-size: 0.88rem; color: #666C6D; font-weight: 300; line-height: 1.65; margin-bottom: 1.5rem; }
-form { display: flex; flex-direction: column; gap: 0.7rem; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.75rem; font-weight: 500; color: #666C6D; }
-input, select { background: #f6f9fc; border: 1.5px solid #ECEDED; border-radius: 8px; color: #1F053B; font-family: Helvetica Neue, Arial, sans-serif; font-size: 0.9rem; padding: 0.65rem 0.9rem; outline: none; width: 100%; box-sizing: border-box; }
-input:focus, select:focus { border-color: #1F053B; }
+.wcard.dir::before { background: var(--yellow); }
+.wcard.brd::before { background: linear-gradient(90deg,var(--violet),var(--magenta)); }
+.wcard h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; color: var(--purple); margin-bottom: 0.4rem; }
+.wcard p { font-size: 0.88rem; color: var(--grey-md); font-weight: 300; line-height: 1.65; margin-bottom: 1.5rem; }
+form { display: flex; flex-direction: column; gap: 0.75rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.75rem; font-weight: 500; color: var(--grey-md); }
+input, select { background: var(--surface); border: 1.5px solid var(--border); border-radius: 7px; color: var(--purple); font-family: var(--font); font-size: 0.9rem; font-weight: 400; padding: 0.65rem 0.85rem; transition: border-color 0.2s; outline: none; width: 100%; }
+input::placeholder { color: var(--ink-dim); }
+input:focus, select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(31,5,59,0.07); }
 select { appearance: none; cursor: pointer; }
-.btn-submit-races { width: 100%; padding: 0.75rem; background: #F2CF00; color: #000; border: none; border-radius: 9px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
-.btn-submit-brands { width: 100%; padding: 0.75rem; background: #B026FF; color: #fff; border: none; border-radius: 9px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
-.form-note { font-size: 0.72rem; color: #8898aa; text-align: center; }
+.btn-form-dir { width: 100%; justify-content: center; background: var(--yellow); color: var(--black); padding: 0.75rem; border-radius: 9px; font-size: 0.95rem; }
+.btn-form-dir:hover { background: #f5d800; }
+.btn-form-brd { width: 100%; justify-content: center; background: var(--violet); color: #fff; padding: 0.75rem; border-radius: 9px; font-size: 0.95rem; }
+.btn-form-brd:hover { background: #9a00e0; }
+.form-note { font-size: 0.73rem; color: var(--ink-dim); text-align: center; }
 .form-success { display: none; text-align: center; padding: 2rem 1rem; }
-.form-success .check { font-size: 2rem; margin-bottom: 0.5rem; }
-.form-success h3 { font-size: 1.1rem; font-weight: 700; color: #1F053B; margin-bottom: 0.3rem; }
-.form-success p { font-size: 0.85rem; color: #666C6D; }
-footer { background: #1F053B; padding: 2.5rem 2rem; }
-.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-inner svg { height: 20px; width: auto; filter: invert(1); }
-.footer-links { display: flex; gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
-.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; }
+.form-success .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.form-success h3 { font-size: 1.1rem; font-weight: 700; color: var(--purple); margin-bottom: 0.3rem; }
+.form-success p { font-size: 0.85rem; color: var(--grey-md); font-weight: 300; }
+
+/* FOOTER */
+footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
+.footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo svg { height: 20px; width: auto; filter: invert(1); }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; }
+.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: rgba(255,255,255,0.75); }
 .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
-@media(max-width:768px) { .split, .aud-grid, .waitlist-grid { grid-template-columns: 1fr; } .split.flip .visual { order: 0; } .stats-grid { grid-template-columns: repeat(2,1fr); } .stat-block:nth-child(2) { border-right: none; } }
+
+/* RESPONSIVE */
+@media(max-width:960px) {
+  .feature-row { grid-template-columns: 1fr; gap: 2.5rem; }
+  .feature-row.flip .feature-visual { order: 0; }
+  .aud-grid { grid-template-columns: 1fr; }
+  .waitlist-cards { grid-template-columns: 1fr; max-width: 440px; }
+  .social-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:640px) {
+  .form-row { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#hero" class="logo">
+  <a href="#hero" class="nav-logo">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="22" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 449.839844 393.894531 L 461.738281 393.894531 C 468.296875 393.894531 473.632812 388.554688 473.632812 381.996094 C 473.632812 375.4375 468.296875 370.101562 461.738281 370.101562 L 449.839844 370 Z M 474.695312 421.058594 L 485.65625 421.058594 L 469.464844 405.292969 L 472.601562 403.71875 C 480.882812 399.558594 486.027344 391.234375 486.027344 381.996094 C 486.027344 368.617188 475.140625 357.722656 461.761719 357.707031 L 437.449219 357.707031 L 437.449219 421.058594 L 444.839844 421.058594 L 444.839844 364.960938 L 461.707031 365.101562 C 471.054688 365.101562 478.632812 372.679688 478.632812 381.996094 C 478.632812 391.3125 471.054688 398.894531 461.738281 398.894531 L 452.929688 398.894531 Z M 497.957031 426.058594 L 472.597656 426.058594 L 449.839844 402.886719 L 449.839844 426.058594 L 432.449219 426.058594 L 432.449219 352.707031 L 461.765625 352.707031 C 477.902344 352.726562 491.027344 365.863281 491.027344 381.996094 C 491.027344 391.980469 486.050781 401.074219 477.832031 406.464844 Z M 497.957031 426.058594 "/>
 <path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 506.582031 423.375 L 520.121094 423.375 L 543.023438 381.28125 L 567.050781 423.375 L 581.496094 423.375 L 542.761719 354.820312 Z M 506.582031 423.375 "/>
@@ -151,373 +244,248 @@ footer { background: #1F053B; padding: 2.5rem 2rem; }
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-tag"><span class="dot"></span>Coming Soon — Join the Waitlist</div>
-  <h1>Turn your race into a<br/><strong>revenue engine.</strong></h1>
-  <p class="hero-sub">RaceHQ combines event registration with a sponsor marketplace — so race directors earn beyond the entry fee.</p>
-  <div class="hero-ctas">
-    <a href="#waitlist-races" class="btn btn-yellow">For Races →</a>
-    <a href="#waitlist-brands" class="btn btn-ghost">For Brands</a>
+  <svg class="hero-topo" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="glow-y"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glow-v"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="soft"><feGaussianBlur stdDeviation="1"/></filter>
+    </defs>
+    <g stroke="rgba(176,38,255,0.12)" stroke-width="1" fill="none" filter="url(#soft)">
+      <path d="M -50 750 Q 200 700 400 720 Q 600 740 800 680 Q 1000 620 1200 650 Q 1350 670 1500 630"/>
+      <path d="M -50 700 Q 150 640 350 660 Q 550 680 750 610 Q 950 540 1150 570 Q 1320 595 1500 555"/>
+      <path d="M -50 650 Q 180 580 380 605 Q 580 630 780 555 Q 980 480 1180 510 Q 1340 532 1500 490"/>
+      <path d="M -50 600 Q 200 530 420 552 Q 640 574 840 500 Q 1040 428 1240 455 Q 1390 474 1500 440"/>
+      <path d="M -50 550 Q 220 475 440 500 Q 660 525 860 448 Q 1060 372 1260 400 Q 1400 418 1500 385"/>
+    </g>
+    <g stroke="rgba(176,38,255,0.22)" stroke-width="1.2" fill="none">
+      <path class="topo-pulse" d="M -50 480 Q 100 410 280 435 Q 460 460 640 388 Q 820 316 1020 345 Q 1200 370 1380 330 Q 1430 320 1500 305"/>
+      <path class="topo-pulse" d="M -50 430 Q 120 358 300 382 Q 480 406 660 332 Q 840 258 1040 288 Q 1220 315 1400 272 Q 1445 261 1500 248" style="animation-delay:-2s"/>
+      <path d="M -50 380 Q 140 305 320 330 Q 500 355 680 278 Q 860 202 1060 232 Q 1240 260 1420 215"/>
+    </g>
+    <path class="topo-trace" filter="url(#glow-y)" d="M -20 820 Q 80 760 180 710 Q 260 668 320 620 Q 390 562 430 490 Q 470 418 520 365 Q 580 302 660 270 Q 740 238 820 255 Q 900 272 960 230 Q 1020 188 1100 172 Q 1180 156 1260 140 Q 1340 124 1420 110 Q 1460 103 1500 95" stroke="#F2CF00" stroke-width="1.8" fill="none" opacity="0.7"/>
+    <path class="topo-trace-2" filter="url(#glow-y)" d="M -20 880 Q 100 840 200 800 Q 300 760 380 720 Q 460 680 520 630 Q 590 572 640 515 Q 690 460 750 420 Q 820 375 900 355 Q 980 335 1060 320 Q 1160 302 1260 290 Q 1360 278 1460 262" stroke="#F2CF00" stroke-width="1.2" fill="none" opacity="0.45"/>
+    <path class="topo-trace-3" filter="url(#glow-v)" d="M -20 280 Q 60 255 160 265 Q 280 278 380 248 Q 500 214 600 195 Q 700 176 800 188 Q 900 200 1000 178 Q 1100 156 1200 145 Q 1310 133 1420 118" stroke="#B026FF" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <g filter="url(#glow-y)" opacity="0.8">
+      <circle cx="320" cy="620" r="3.5" fill="#F2CF00"/>
+      <circle cx="520" cy="365" r="3" fill="#F2CF00"/>
+      <circle cx="660" cy="270" r="4" fill="#F2CF00"/>
+      <circle cx="960" cy="230" r="3" fill="#F2CF00"/>
+      <circle cx="1100" cy="172" r="3.5" fill="#F2CF00"/>
+    </g>
+    <g filter="url(#glow-v)" opacity="0.6">
+      <circle cx="280" cy="435" r="2.5" fill="#B026FF"/>
+      <circle cx="640" cy="388" r="2" fill="#B026FF"/>
+      <circle cx="1020" cy="345" r="2.5" fill="#B026FF"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-label"><span></span>Coming Soon — Join the Waitlist</div>
+    <h1>Turn your race into a<br/><em>revenue engine.</em></h1>
+    <p class="hero-sub">RaceHQ combines event registration with a sponsor marketplace — so race directors earn beyond the entry fee.</p>
+    <div class="hero-ctas">
+      <a href="#waitlist-races" class="btn btn-yellow btn-xl">For Races →</a>
+      <a href="#waitlist-brands" class="btn btn-outline btn-xl">For Brands</a>
+    </div>
+    <p class="hero-note">Race director? <a href="#waitlist-races">Get early access.</a> &nbsp;·&nbsp; Brand or sponsor? <a href="#waitlist-brands">Join the marketplace.</a></p>
   </div>
+
   <div class="event-scroller">
     <div class="scroller-label">Powered by RaceHQ</div>
     <div class="scroller-row">
-      <div class="scroller-track">
-        <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K San Diego</span>
-            <span class="ec-city">San Diego, CA</span>
-            <span class="ec-date">Oct 24, 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K San Diego</span>
-            <span class="ec-city">Mission Bay</span>
-            <span class="ec-date">Oct 24, 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Dallas</span>
-            <span class="ec-city">Dallas, TX</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Dallas</span>
-            <span class="ec-city">Dallas, TX</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Los Angeles</span>
-            <span class="ec-city">Los Angeles, CA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Los Angeles</span>
-            <span class="ec-city">Los Angeles, CA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K San Diego</span>
-            <span class="ec-city">San Diego, CA</span>
-            <span class="ec-date">Oct 24, 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K San Diego</span>
-            <span class="ec-city">Mission Bay</span>
-            <span class="ec-date">Oct 24, 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Seattle</span>
-            <span class="ec-city">Seattle, WA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Dallas</span>
-            <span class="ec-city">Dallas, TX</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Dallas</span>
-            <span class="ec-city">Dallas, TX</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Los Angeles</span>
-            <span class="ec-city">Los Angeles, CA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-        <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener">
-          <div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div>
-          <div class="ec-info">
-            <span class="ec-name">8K Los Angeles</span>
-            <span class="ec-city">Los Angeles, CA</span>
-            <span class="ec-date">Fall 2026</span>
-          </div>
-        </a>
-      </div>
+      <div class="scroller-track"><a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">San Diego, CA</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">Mission Bay</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">San Diego, CA</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">Mission Bay</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a></div>
     </div>
   </div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<div class="split" id="registration">
-  <div class="text">
-    <span class="section-label">Event Registration</span>
-    <h2>Everything you need to run a great race.</h2>
+<!-- FEATURE ROW 1 — Registration -->
+<div class="feature-row" id="registration">
+  <div class="feature-text">
+    <span class="eyebrow">Event Registration</span>
+    <h2>Everything you need to<br/>run a great race.</h2>
     <p class="lead">Simple, fast registration built for running events. Set up in minutes. Participants register in seconds.</p>
-    <ul class="points">
-      <li><span class="check">✓</span>Custom event pages with category &amp; wave management</li>
-      <li><span class="check">✓</span>Secure payments with instant payouts</li>
-      <li><span class="check">✓</span>Waitlists, transfers &amp; deferrals built in</li>
-      <li><span class="check">✓</span>Race-day check-in, bib assignment &amp; live dashboards</li>
-      <li><span class="check">✓</span>Automated confirmation &amp; reminder emails</li>
+    <ul class="feature-points">
+      <li><span class="chk"></span>Custom event pages with category &amp; wave management</li>
+      <li><span class="chk"></span>Secure payments with instant payouts</li>
+      <li><span class="chk"></span>Waitlists, transfers &amp; deferrals built in</li>
+      <li><span class="chk"></span>Race-day check-in, bib assignment &amp; live dashboards</li>
+      <li><span class="chk"></span>Automated confirmation &amp; reminder emails</li>
     </ul>
-    <a href="#waitlist-races" class="btn btn-dark">Get Early Access →</a>
+    <a href="#waitlist-races" class="btn btn-dark btn-lg">Get Early Access →</a>
   </div>
-  <div class="visual">
-    <div class="card">
-      <div class="card-bar">
-        <div class="cd" style="background:#ff5f57"></div>
-        <div class="cd" style="background:#ffbd2e"></div>
-        <div class="cd" style="background:#28c840"></div>
-        <div class="card-url">racehq.io/events/city-marathon</div>
-      </div>
-      <div class="card-body">
-        <div class="event-row">
-          <div class="event-badge">🏙️</div>
-          <div>
-            <div class="event-name">City Marathon 2025</div>
-            <div class="event-meta">Registration open · 14 weeks to race day</div>
-          </div>
+  <div class="feature-visual">
+    <div class="product-card">
+      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/city-marathon</div></div>
+      <div class="pc-body">
+        <div class="pc-event-row"><div class="pc-badge">🏙️</div><div><div class="pc-event-name">City Marathon 2025</div><div class="pc-event-meta">Registration open · 14 weeks to race day</div></div></div>
+        <div class="pc-stats">
+          <div class="pc-stat"><div class="pc-stat-val">3,241</div><div class="pc-stat-lbl">Registered</div></div>
+          <div class="pc-stat"><div class="pc-stat-val">759</div><div class="pc-stat-lbl">Remaining</div></div>
+          <div class="pc-stat"><div class="pc-stat-val">£48k</div><div class="pc-stat-lbl">Revenue</div></div>
         </div>
-        <div class="stats-row">
-          <div class="stat-box"><div class="stat-val">3,241</div><div class="stat-lbl">Registered</div></div>
-          <div class="stat-box"><div class="stat-val">759</div><div class="stat-lbl">Remaining</div></div>
-          <div class="stat-box"><div class="stat-val">£48k</div><div class="stat-lbl">Revenue</div></div>
-        </div>
-        <div>
-          <div class="prog-hd"><span>Capacity</span><span>81%</span></div>
-          <div class="prog-bar"><div class="prog-fill"></div></div>
-        </div>
-        <div class="entry"><div class="av">SJ</div><div class="en">Sarah Johnson</div><div class="et">Full · Wave A</div><div class="ep">Paid</div></div>
-        <div class="entry"><div class="av">MT</div><div class="en">Marcus Torres</div><div class="et">Half · Wave B</div><div class="ep">Paid</div></div>
-        <div class="entry"><div class="av">EK</div><div class="en">Emma King</div><div class="et">Full · Wave A</div><div class="ep">Paid</div></div>
+        <div><div class="pc-prog-hd"><span>Capacity</span><span>81%</span></div><div class="pc-prog-bar"><div class="pc-prog-fill"></div></div></div>
+        <div class="pc-entry"><div class="pc-av">SJ</div><div class="pc-en">Sarah Johnson</div><div class="pc-et">Full · Wave A</div><div class="pc-ep">Paid</div></div>
+        <div class="pc-entry"><div class="pc-av">MT</div><div class="pc-en">Marcus Torres</div><div class="pc-et">Half · Wave B</div><div class="pc-ep">Paid</div></div>
+        <div class="pc-entry"><div class="pc-av">EK</div><div class="pc-en">Emma King</div><div class="pc-et">Full · Wave A</div><div class="pc-ep">Paid</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<div class="split flip" id="sponsorship">
-  <div class="text">
-    <span class="section-label">Sponsor Hub</span>
-    <h2>Your participants. Your new revenue stream.</h2>
+<!-- FEATURE ROW 2 — Sponsor Hub -->
+<div class="feature-row flip" id="sponsorship">
+  <div class="feature-text">
+    <span class="eyebrow">Sponsor Hub</span>
+    <h2>Your participants.<br/>Your new <em>revenue stream.</em></h2>
     <p class="lead">Every event gets a branded Sponsor Hub. Your participants find deals. You earn from every conversion — automatically.</p>
-    <ul class="points">
-      <li><span class="check">✓</span>Branded sponsor hub created with every event</li>
-      <li><span class="check">✓</span>Affiliate links, discount codes, or flat-fee deals</li>
-      <li><span class="check">✓</span>Brands matched to your event audience</li>
-      <li><span class="check">✓</span>Automatic commission tracking &amp; payouts</li>
+    <ul class="feature-points">
+      <li><span class="chk"></span>Branded sponsor hub created with every event</li>
+      <li><span class="chk"></span>Affiliate links, discount codes, or flat-fee deals</li>
+      <li><span class="chk"></span>Brands matched to your event audience</li>
+      <li><span class="chk"></span>Automatic commission tracking &amp; payouts</li>
     </ul>
-    <a href="#waitlist-races" class="btn btn-yellow2">See How It Works →</a>
+    <a href="#waitlist-races" class="btn btn-yellow btn-lg">See How It Works →</a>
   </div>
-  <div class="visual">
-    <div class="card">
-      <div class="card-bar">
-        <div class="cd" style="background:#ff5f57"></div>
-        <div class="cd" style="background:#ffbd2e"></div>
-        <div class="cd" style="background:#28c840"></div>
-        <div class="card-url">racehq.io/events/city-marathon/sponsors</div>
-      </div>
-      <div class="card-body">
-        <div class="hub-lbl">Exclusive Deals for Your Participants</div>
-        <div class="deal"><div class="deal-icon">👟</div><div style="flex:1"><div class="deal-name">TrailBrand Pro</div><div class="deal-desc">20% off race-day footwear · code CITY20</div></div><div class="deal-cta">Claim →</div></div>
-        <div class="deal"><div class="deal-icon">🧴</div><div style="flex:1"><div class="deal-name">FuelUp Nutrition</div><div class="deal-desc">15% off gels &amp; hydration</div></div><div class="deal-cta">Claim →</div></div>
-        <div class="deal"><div class="deal-icon">⌚</div><div style="flex:1"><div class="deal-name">PaceWatch Co.</div><div class="deal-desc">$30 off GPS running watches</div></div><div class="deal-cta">Claim →</div></div>
-        <div class="deal"><div class="deal-icon">✈️</div><div style="flex:1"><div class="deal-name">RaceTravel</div><div class="deal-desc">10% off race weekend hotels</div></div><div class="deal-cta">Claim →</div></div>
-        <div class="earn-box">
-          <div><div class="hub-lbl" style="margin:0">Sponsor Earnings This Month</div><div class="earn-lbl">4 active partners</div></div>
-          <div class="earn-val">$2,140</div>
-        </div>
+  <div class="feature-visual">
+    <div class="product-card">
+      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/city-marathon/sponsors</div></div>
+      <div class="pc-body">
+        <div class="pc-hub-lbl">Exclusive Deals for Your Participants</div>
+        <div class="pc-deal"><div class="phdl">👟</div><div class="phdi"><div class="phdn">TrailBrand Pro</div><div class="phdd">20% off race-day footwear · code CITY20</div></div><div class="phdcta">Claim →</div></div>
+        <div class="pc-deal"><div class="phdl">🧴</div><div class="phdi"><div class="phdn">FuelUp Nutrition</div><div class="phdd">15% off gels &amp; hydration</div></div><div class="phdcta">Claim →</div></div>
+        <div class="pc-deal"><div class="phdl">⌚</div><div class="phdi"><div class="phdn">PaceWatch Co.</div><div class="phdd">$30 off GPS running watches</div></div><div class="phdcta">Claim →</div></div>
+        <div class="pc-deal"><div class="phdl">✈️</div><div class="phdi"><div class="phdn">RaceTravel</div><div class="phdd">10% off race weekend hotels</div></div><div class="phdcta">Claim →</div></div>
+        <div class="pc-earn"><div><div class="pc-hub-lbl" style="margin:0;font-size:0.62rem">Sponsor Earnings This Month</div><div class="pc-earn-lbl">4 active partners</div></div><div class="pc-earn-val">$2,140</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="stats-band">
-  <div class="stats-grid">
-    <div class="stat-block"><div class="stat-big"><em>12M</em>+</div><div class="stat-lbl2">Endurance participants globally</div></div>
-    <div class="stat-block"><div class="stat-big">$<em>4B</em>+</div><div class="stat-lbl2">Endurance sports market</div></div>
-    <div class="stat-block"><div class="stat-big"><em>78</em>%</div><div class="stat-lbl2">Race directors without sponsor revenue</div></div>
-    <div class="stat-block"><div class="stat-big"><em>3</em>x</div><div class="stat-lbl2">Higher conversion vs social ads</div></div>
-  </div>
-</div>
+<hr class="div"/>
 
-<section class="audiences">
-  <div style="text-align:center;margin-bottom:3rem">
-    <span class="section-label">Built for both sides</span>
-    <h2>One platform. Two audiences.</h2>
-  </div>
-  <div class="aud-grid">
-    <div class="aud-card aud-light">
-      <div class="aud-icon">🏁</div>
-      <h3>For Races</h3>
-      <p>Register participants, manage your event, and earn from brand deals — all in one place.</p>
-      <ul class="aud-points">
-        <li>Full event registration platform included</li>
-        <li>Branded Sponsor Hub page per event</li>
-        <li>Choose your own brand partners &amp; deal types</li>
-        <li>Automatic commission tracking and payouts</li>
-      </ul>
-      <a href="#waitlist-races" class="btn btn-yellow2">Get Early Access →</a>
-    </div>
-    <div class="aud-card aud-dark">
-      <div class="aud-icon">🤝</div>
-      <h3>For Brands</h3>
-      <p>Reach purchase-ready endurance athletes at exactly the moment they're buying.</p>
-      <ul class="aud-points">
-        <li>Access to verified race participant audiences</li>
-        <li>Affiliate, discount code, or flat-fee options</li>
-        <li>Matched to events by sport, size &amp; location</li>
-        <li>Real-time performance tracking &amp; ROI reporting</li>
-      </ul>
-      <a href="#waitlist-brands" class="btn btn-violet">For Brands →</a>
-    </div>
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <p class="social-eyebrow">What race directors are saying</p>
+  <div class="social-grid">
+    <div class="social-card"><p class="social-quote">Finally a registration platform that understands what race directors actually need. The sponsor hub alone will pay for itself ten times over.</p><div class="social-name">Jamie Collins</div><div class="social-role">Race Director · Bristol Half Marathon</div></div>
+    <div class="social-card"><p class="social-quote">We've been leaving money on the table for years. Our participants are buying gear anyway — now we get a cut of it. It's a no-brainer.</p><div class="social-name">Priya Mehta</div><div class="social-role">Founder · Urban Endurance Events</div></div>
+    <div class="social-card"><p class="social-quote">The affiliate model is so much better than asking brands for cash. Lower barrier, more partners, and the income is actually predictable.</p><div class="social-name">Tom Reeves</div><div class="social-role">Race Director · Peak Trail Series</div></div>
   </div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<section class="waitlist">
-  <div class="waitlist-inner">
-    <div class="waitlist-hd">
-      <span class="section-label">Join the Waitlist</span>
-      <h2>Be first on the start line.</h2>
-      <p>RaceHQ is launching soon. Join now for early access and founding pricing.</p>
+<!-- TWO AUDIENCES -->
+<section id="audiences">
+  <div class="container">
+    <div class="audiences-header">
+      <span class="eyebrow">Built for both sides</span>
+      <h2>One platform. Two audiences.</h2>
     </div>
-    <div class="waitlist-grid">
-      <div class="wcard wcard-races" id="waitlist-races">
+    <div class="aud-grid">
+      <div class="aud-card aud-light">
+        <div class="aud-icon">🏁</div>
         <h3>For Races</h3>
-        <p>Early access, founding pricing, and first pick of brand partners before launch.</p>
-        <form name="directors-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-directors">
-          <input type="hidden" name="form-name" value="directors-waitlist"/>
-          <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
-          <div class="form-row">
-            <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
-            <label>Email<input type="email" name="email" placeholder="you@email.com" required/></label>
-          </div>
-          <label>Event Name<input type="text" name="event" placeholder="e.g. Bristol Half Marathon"/></label>
-          <label>Annual participants
-            <select name="size">
-              <option value="">Select range</option>
-              <option>Under 500</option>
-              <option>500 – 2,000</option>
-              <option>2,000 – 10,000</option>
-              <option>10,000+</option>
-            </select>
-          </label>
-          <button type="submit" class="btn-submit-races">For Races →</button>
-          <p class="form-note">Free to join. No credit card required.</p>
-        </form>
-        <div class="form-success" id="success-directors">
-          <div class="check">🏁</div>
-          <h3>You're on the list!</h3>
-          <p>We'll be in touch with early access details soon.</p>
-        </div>
+        <p>Register participants, manage your event, and earn from brand deals — all in one place.</p>
+        <ul class="aud-points">
+          <li>Full event registration platform included</li>
+          <li>Branded Sponsor Hub page per event</li>
+          <li>Choose your own brand partners &amp; deal types</li>
+          <li>Automatic commission tracking and payouts</li>
+        </ul>
+        <a href="#waitlist-races" class="btn btn-yellow" style="align-self:flex-start">Get Early Access →</a>
       </div>
-      <div class="wcard wcard-brands" id="waitlist-brands">
+      <div class="aud-card aud-dark">
+        <div class="aud-icon">🤝</div>
         <h3>For Brands</h3>
-        <p>Early access to the brand dashboard and first chance to connect with race directors.</p>
-        <form name="brands-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-brands">
-          <input type="hidden" name="form-name" value="brands-waitlist"/>
-          <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
-          <div class="form-row">
-            <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
-            <label>Email<input type="email" name="email" placeholder="you@brand.com" required/></label>
-          </div>
-          <label>Brand / Company<input type="text" name="brand" placeholder="e.g. TrailBrand Pro" required/></label>
-          <label>Product category
-            <select name="category">
-              <option value="">Select category</option>
-              <option>Footwear &amp; Apparel</option>
-              <option>Nutrition &amp; Supplements</option>
-              <option>Wearables &amp; Tech</option>
-              <option>Travel &amp; Accommodation</option>
-              <option>Recovery &amp; Wellness</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <button type="submit" class="btn-submit-brands">For Brands →</button>
-          <p class="form-note">Free to list. We'll be in touch to discuss terms.</p>
-        </form>
-        <div class="form-success" id="success-brands">
-          <div class="check">🤝</div>
-          <h3>Great — we'll be in touch!</h3>
-          <p>Our team will reach out to discuss partnership opportunities.</p>
-        </div>
+        <p>Reach purchase-ready endurance athletes at exactly the moment they're buying.</p>
+        <ul class="aud-points">
+          <li>Access to verified race participant audiences</li>
+          <li>Affiliate, discount code, or flat-fee options</li>
+          <li>Matched to events by sport, size &amp; location</li>
+          <li>Real-time performance tracking &amp; ROI reporting</li>
+        </ul>
+        <a href="#waitlist-brands" class="btn btn-violet" style="align-self:flex-start">For Brands →</a>
       </div>
     </div>
   </div>
 </section>
 
+<hr class="div"/>
+
+<!-- WAITLIST -->
+<section id="waitlist">
+  <div class="waitlist-header">
+    <span class="eyebrow">Join the Waitlist</span>
+    <h2>Be first on the start line.</h2>
+    <p>RaceHQ is launching soon. Join now for early access and founding pricing.</p>
+  </div>
+  <div class="waitlist-cards">
+    <div class="wcard dir" id="waitlist-races">
+      <h3>For Races</h3>
+      <p>Early access, founding pricing, and first pick of brand partners before launch.</p>
+      <form name="directors-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-directors">
+        <input type="hidden" name="form-name" value="directors-waitlist"/>
+        <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
+        <div class="form-row">
+          <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
+          <label>Email<input type="email" name="email" placeholder="you@email.com" required/></label>
+        </div>
+        <label>Event Name<input type="text" name="event" placeholder="e.g. Bristol Half Marathon"/></label>
+        <label>Annual participants
+          <select name="size">
+            <option value="">Select range</option>
+            <option>Under 500</option>
+            <option>500 – 2,000</option>
+            <option>2,000 – 10,000</option>
+            <option>10,000+</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-form-dir">For Races →</button>
+        <p class="form-note">Free to join. No credit card required.</p>
+      </form>
+      <div class="form-success" id="success-directors"><div class="icon">🏁</div><h3>You're on the list!</h3><p>We'll be in touch with early access details soon.</p></div>
+    </div>
+    <div class="wcard brd" id="waitlist-brands">
+      <h3>For Brands</h3>
+      <p>Early access to the brand dashboard and first chance to connect with race directors.</p>
+      <form name="brands-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-brands">
+        <input type="hidden" name="form-name" value="brands-waitlist"/>
+        <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
+        <div class="form-row">
+          <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
+          <label>Email<input type="email" name="email" placeholder="you@brand.com" required/></label>
+        </div>
+        <label>Brand / Company<input type="text" name="brand" placeholder="e.g. TrailBrand Pro" required/></label>
+        <label>Product category
+          <select name="category">
+            <option value="">Select category</option>
+            <option>Footwear &amp; Apparel</option>
+            <option>Nutrition &amp; Supplements</option>
+            <option>Wearables &amp; Tech</option>
+            <option>Travel &amp; Accommodation</option>
+            <option>Recovery &amp; Wellness</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-form-brd">For Brands →</button>
+        <p class="form-note">Free to list. We'll be in touch to discuss terms.</p>
+      </form>
+      <div class="form-success" id="success-brands"><div class="icon">🤝</div><h3>Great — we'll be in touch!</h3><p>Our team will reach out to discuss partnership opportunities.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#hero">
+    <a href="#hero" class="footer-logo">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 449.839844 393.894531 L 461.738281 393.894531 C 468.296875 393.894531 473.632812 388.554688 473.632812 381.996094 C 473.632812 375.4375 468.296875 370.101562 461.738281 370.101562 L 449.839844 370 Z M 474.695312 421.058594 L 485.65625 421.058594 L 469.464844 405.292969 L 472.601562 403.71875 C 480.882812 399.558594 486.027344 391.234375 486.027344 381.996094 C 486.027344 368.617188 475.140625 357.722656 461.761719 357.707031 L 437.449219 357.707031 L 437.449219 421.058594 L 444.839844 421.058594 L 444.839844 364.960938 L 461.707031 365.101562 C 471.054688 365.101562 478.632812 372.679688 478.632812 381.996094 C 478.632812 391.3125 471.054688 398.894531 461.738281 398.894531 L 452.929688 398.894531 Z M 497.957031 426.058594 L 472.597656 426.058594 L 449.839844 402.886719 L 449.839844 426.058594 L 432.449219 426.058594 L 432.449219 352.707031 L 461.765625 352.707031 C 477.902344 352.726562 491.027344 365.863281 491.027344 381.996094 C 491.027344 391.980469 486.050781 401.074219 477.832031 406.464844 Z M 497.957031 426.058594 "/>
 <path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 506.582031 423.375 L 520.121094 423.375 L 543.023438 381.28125 L 567.050781 423.375 L 581.496094 423.375 L 542.761719 354.820312 Z M 506.582031 423.375 "/>
@@ -556,7 +524,7 @@ async function handleForm(formId, successId) {
       });
       if (res.ok) { form.style.display='none'; success.style.display='block'; }
       else { alert('Something went wrong. Please email hello@racehq.io'); }
-    } catch(err) { alert('Something went wrong. Please email hello@racehq.io'); }
+    } catch(e) { alert('Something went wrong. Please email hello@racehq.io'); }
   });
 }
 handleForm('form-directors','success-directors');
