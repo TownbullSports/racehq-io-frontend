@@ -430,8 +430,8 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
     <div class="wcard dir" id="waitlist-races">
       <h3>For Races</h3>
       <p>Early access, founding pricing, and first pick of brand partners before launch.</p>
-      <form name="directors-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-directors">
-        <input type="hidden" name="form-name" value="directors-waitlist"/>
+      <form name="races-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-races">
+        <input type="hidden" name="form-name" value="races-waitlist"/>
         <p style="display:none"><label>Skip: <input name="bot-field"/></label></p>
         <div class="form-row">
           <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
@@ -450,7 +450,7 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
         <button type="submit" class="btn btn-form-dir">For Races →</button>
         <p class="form-note">Free to join. No credit card required.</p>
       </form>
-      <div class="form-success" id="success-directors"><div class="icon">🏁</div><h3>You're on the list!</h3><p>We'll be in touch with early access details soon.</p></div>
+      <div class="form-success" id="success-races"><div class="icon">🏁</div><h3>You're on the list!</h3><p>We'll be in touch with early access details soon.</p></div>
     </div>
     <div class="wcard brd" id="waitlist-brands">
       <h3>For Brands</h3>
@@ -511,23 +511,33 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
 </footer>
 
 <script>
-async function handleForm(formId, successId) {
+function handleForm(formId, successId) {
   var form = document.getElementById(formId);
   var success = document.getElementById(successId);
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    try {
-      var res = await fetch('/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(new FormData(form)).toString()
-      });
-      if (res.ok) { form.style.display='none'; success.style.display='block'; }
-      else { alert('Something went wrong. Please email hello@racehq.io'); }
-    } catch(e) { alert('Something went wrong. Please email hello@racehq.io'); }
+    var data = new FormData(form);
+    var encoded = new URLSearchParams(data).toString();
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      if (xhr.status === 200 || xhr.status === 204) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    };
+    xhr.onerror = function() {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    };
+    xhr.send(encoded);
   });
 }
-handleForm('form-directors','success-directors');
+handleForm('form-races','success-races');
 handleForm('form-brands','success-brands');
 </script>
 
