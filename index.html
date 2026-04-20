@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RaceHQ — Register. Connect. Earn.</title>
 <meta name="description" content="RaceHQ combines event registration with a sponsor marketplace — so race directors earn beyond the entry fee."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231F053B'/><text y='78' x='50' text-anchor='middle' font-family='Helvetica Neue,Arial,sans-serif' font-size='72' font-weight='700' fill='%23F2CF00'>Q</text></svg>"/>
 <style>
 :root {
   --purple:  #1F053B;
@@ -32,8 +33,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba
 .nav-logo svg path { fill: var(--purple) !important; }
 .nav-ctas { display: flex; gap: 0.6rem; }
 .btn { display: inline-flex; align-items: center; padding: 0.55rem 1.25rem; border-radius: 8px; font-family: var(--font); font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: all 0.18s; text-decoration: none; border: none; white-space: nowrap; }
-.btn-outline { background: transparent; color: var(--purple); border: 1.5px solid var(--border); }
-.btn-outline:hover { border-color: var(--purple); }
+.btn-outline { background: transparent; color: var(--purple); border: 1.5px solid var(--grey-md); }
+.btn-outline:hover { border-color: var(--purple); background: rgba(31,5,59,0.05); }
 .btn-dark { background: var(--purple); color: #fff; }
 .btn-dark:hover { background: #2d0850; box-shadow: 0 4px 14px rgba(31,5,59,0.3); }
 .btn-yellow { background: var(--yellow); color: var(--black); }
@@ -46,7 +47,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba
 /* HERO */
 #hero { min-height: 100vh; background: linear-gradient(160deg, #0d0120 0%, #1F053B 45%, #2a0a4a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 110px clamp(1.5rem,5vw,3rem) 0; position: relative; overflow: hidden; }
 #hero::before { content: ''; position: absolute; top: 25%; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(176,38,255,0.22) 0%, rgba(242,207,0,0.08) 45%, transparent 75%); pointer-events: none; z-index: 1; }
-#hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, transparent, #fff); pointer-events: none; z-index: 2; }
+#hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 340px; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.6) 55%, #fff 100%); pointer-events: none; z-index: 2; }
 
 /* TOPO SVG */
 .hero-topo { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
@@ -68,26 +69,23 @@ h1 em { font-style: normal; color: var(--yellow); }
 .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; position: relative; z-index: 3; }
 .hero-ctas .btn-outline { color: #fff; border-color: rgba(255,255,255,0.3); }
 .hero-ctas .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
-.hero-note { margin-top: 1.25rem; font-size: 0.8rem; color: rgba(255,255,255,0.45); opacity: 0; animation: fadeUp 0.6s 0.65s forwards; position: relative; z-index: 3; }
-.hero-note a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 3px; }
-.hero-note a:hover { color: #fff; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
 /* EVENT SCROLLER */
-.event-scroller { width: 100%; margin-top: 4rem; position: relative; z-index: 3; overflow: hidden; display: flex; flex-direction: column; gap: 0; padding-bottom: 0; }
-.scroller-label { text-align: center; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; }
+.event-scroller { width: 100%; margin-top: 8rem; position: relative; z-index: 3; overflow: hidden; display: flex; flex-direction: column; gap: 0; }
+.scroller-label { text-align: center; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; text-transform: none; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; }
 .scroller-row { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
 .scroller-track { display: flex; gap: 0.75rem; width: max-content; animation: scrollLeft 40s linear infinite; }
 @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .ec { position: relative; width: 200px; height: 130px; border-radius: 12px; overflow: hidden; flex-shrink: 0; text-decoration: none; display: block; transition: transform 0.2s; }
 .ec:hover { transform: scale(1.03); }
-.ec-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.3s; }
-.ec:hover .ec-img { transform: scale(1.06); }
-.ec::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(31,5,59,0.88) 0%, rgba(31,5,59,0.2) 55%, transparent 100%); }
-.ec-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.6rem 0.75rem; z-index: 2; display: flex; flex-direction: column; gap: 0.1rem; }
-.ec-name { font-size: 0.78rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.ec-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.3s; filter: grayscale(15%) brightness(0.85) contrast(1.05); }
+.ec:hover .ec-img { transform: scale(1.06); filter: grayscale(0%) brightness(0.9) contrast(1.05); }
+.ec::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,2,20,0.92) 0%, rgba(10,2,20,0.55) 45%, rgba(10,2,20,0.1) 100%); }
+.ec-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.65rem 0.8rem; z-index: 2; display: flex; flex-direction: column; gap: 0.15rem; }
+.ec-name { font-size: 0.82rem; font-weight: 700; color: #fff; line-height: 1.2; letter-spacing: -0.01em; }
 .ec-city { font-size: 0.65rem; font-weight: 400; color: rgba(255,255,255,0.65); }
-.ec-date { font-size: 0.62rem; font-weight: 700; color: var(--yellow); letter-spacing: 0.04em; }
+.ec-date { font-size: 0.65rem; font-weight: 500; color: var(--yellow); letter-spacing: 0.03em; }
 
 /* SHARED */
 section { padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3rem); }
@@ -199,13 +197,29 @@ select { appearance: none; cursor: pointer; }
 .form-success p { font-size: 0.85rem; color: var(--grey-md); font-weight: 300; }
 
 /* FOOTER */
-footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
-.footer-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-logo svg { height: 20px; width: auto; filter: invert(1); }
-.footer-links { display: flex; gap: 1.5rem; list-style: none; }
-.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: rgba(255,255,255,0.75); }
-.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,3rem) 1.5rem; }
+.footer-top { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 200px 1fr; gap: 4rem; padding-bottom: 2rem; }
+.footer-brand { display: flex; flex-direction: column; gap: 1.5rem; }
+.footer-logo svg { height: 22px; width: auto; }
+.footer-logo svg path { fill: #ffffff !important; }
+.footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.6; max-width: 160px; }
+.footer-social { display: flex; gap: 0.75rem; }
+.social-icon { width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; text-decoration: none; }
+.social-icon:hover { border-color: var(--yellow); background: rgba(242,207,0,0.08); }
+.social-icon svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); transition: fill 0.2s; }
+.social-icon:hover svg { fill: var(--yellow); }
+.footer-cols { display: grid; grid-template-columns: repeat(5,1fr); gap: 2rem; }
+.footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.82rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+.footer-col ul a:hover { color: rgba(255,255,255,0.9); }
+.footer-bottom { max-width: var(--max); margin: 0 auto; padding-top: 0.5rem; display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+.footer-bottom-links { display: flex; gap: 1.5rem; }
+.footer-bottom-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+@media(max-width:960px) { .footer-top { grid-template-columns: 1fr; gap: 2.5rem; } .footer-cols { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:480px) { .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
 
 /* RESPONSIVE */
 @media(max-width:960px) {
@@ -289,25 +303,21 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
       <a href="#waitlist-races" class="btn btn-yellow btn-xl">For Races →</a>
       <a href="#waitlist-brands" class="btn btn-outline btn-xl">For Brands</a>
     </div>
-    <p class="hero-note">Race director? <a href="#waitlist-races">Get early access.</a> &nbsp;·&nbsp; Brand or sponsor? <a href="#waitlist-brands">Join the marketplace.</a></p>
   </div>
-
   <div class="event-scroller">
-    <div class="scroller-label">Powered by RaceHQ</div>
+    <div class="scroller-label">Endurance events we power</div>
     <div class="scroller-row">
-      <div class="scroller-track"><a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">San Diego, CA</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">Mission Bay</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">San Diego, CA</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/sandiego" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K San Diego</span><span class="ec-city">Mission Bay</span><span class="ec-date">Oct 24, 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1502904550040-7534597429ae?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/seattle" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Seattle</span><span class="ec-city">Seattle, WA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/dallas" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Dallas</span><span class="ec-city">Dallas, TX</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1594882645126-14020914d58d?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a> <a class="ec" href="https://www.run8k.com/los-angeles-1" target="_blank" rel="noopener"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=80&fit=crop')"></div><div class="ec-info"><span class="ec-name">8K Los Angeles</span><span class="ec-city">Los Angeles, CA</span><span class="ec-date">Fall 2026</span></div></a></div>
+      <div class="scroller-track"><a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Running</span><span class="ec-date">5K to Ultra</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Cycling</span><span class="ec-date">Gran Fondo to Gravel</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1560073743-b935a3bdb4be?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Triathlon</span><span class="ec-date">Sprint to Full Distance</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Duathlon</span><span class="ec-date">Run · Bike · Run</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Obstacle</span><span class="ec-date">OCR to Mud Runs</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Open Water</span><span class="ec-date">Pool to Ocean</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1470072538613-d27a3e28f7d7?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Adventure</span><span class="ec-date">Multi-Sport Expeditions</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Fitness Racing</span><span class="ec-date">Gym to Stadium</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">SUP</span><span class="ec-date">Sprint to Expedition</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Rowing</span><span class="ec-date">Regattas & Head Races</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Running</span><span class="ec-date">5K to Ultra</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Cycling</span><span class="ec-date">Gran Fondo to Gravel</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1560073743-b935a3bdb4be?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Triathlon</span><span class="ec-date">Sprint to Full Distance</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Duathlon</span><span class="ec-date">Run · Bike · Run</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Obstacle</span><span class="ec-date">OCR to Mud Runs</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Open Water</span><span class="ec-date">Pool to Ocean</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1470072538613-d27a3e28f7d7?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Adventure</span><span class="ec-date">Multi-Sport Expeditions</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Fitness Racing</span><span class="ec-date">Gym to Stadium</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">SUP</span><span class="ec-date">Sprint to Expedition</span></div></a> <a class="ec" href="#waitlist-races"><div class="ec-img" style="background-image:url('https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400&q=85&fit=crop&crop=center')"></div><div class="ec-info"><span class="ec-name">Rowing</span><span class="ec-date">Regattas & Head Races</span></div></a></div>
     </div>
   </div>
 </section>
-
-<hr class="div"/>
 
 <!-- FEATURE ROW 1 — Registration -->
 <div class="feature-row" id="registration">
   <div class="feature-text">
     <span class="eyebrow">Event Registration</span>
     <h2>Everything you need to<br/>run a great race.</h2>
-    <p class="lead">Simple, fast registration built for running events. Set up in minutes. Participants register in seconds.</p>
+    <p class="lead">Simple, fast registration built for endurance events. Set up in minutes. Participants register in seconds.</p>
     <ul class="feature-points">
       <li><span class="chk"></span>Custom event pages with category &amp; wave management</li>
       <li><span class="chk"></span>Secure payments with instant payouts</li>
@@ -484,9 +494,10 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <a href="#hero" class="footer-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#hero" class="footer-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="22" viewBox="430 345 475 100"><path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 461.738281 396.394531 L 447.339844 396.394531 L 447.339844 367.480469 L 461.6875 367.601562 L 461.738281 367.601562 C 469.675781 367.601562 476.136719 374.058594 476.136719 381.996094 C 476.136719 389.9375 469.675781 396.394531 461.738281 396.394531 M 488.527344 381.996094 C 488.527344 367.234375 476.523438 355.226562 461.765625 355.207031 L 434.949219 355.207031 L 434.949219 423.558594 L 447.339844 423.558594 L 447.339844 396.773438 L 473.648438 423.558594 L 491.808594 423.558594 L 473.722656 405.953125 C 482.496094 401.546875 488.527344 392.460938 488.527344 381.996094 "/>
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 449.839844 393.894531 L 461.738281 393.894531 C 468.296875 393.894531 473.632812 388.554688 473.632812 381.996094 C 473.632812 375.4375 468.296875 370.101562 461.738281 370.101562 L 449.839844 370 Z M 474.695312 421.058594 L 485.65625 421.058594 L 469.464844 405.292969 L 472.601562 403.71875 C 480.882812 399.558594 486.027344 391.234375 486.027344 381.996094 C 486.027344 368.617188 475.140625 357.722656 461.761719 357.707031 L 437.449219 357.707031 L 437.449219 421.058594 L 444.839844 421.058594 L 444.839844 364.960938 L 461.707031 365.101562 C 471.054688 365.101562 478.632812 372.679688 478.632812 381.996094 C 478.632812 391.3125 471.054688 398.894531 461.738281 398.894531 L 452.929688 398.894531 Z M 497.957031 426.058594 L 472.597656 426.058594 L 449.839844 402.886719 L 449.839844 426.058594 L 432.449219 426.058594 L 432.449219 352.707031 L 461.765625 352.707031 C 477.902344 352.726562 491.027344 365.863281 491.027344 381.996094 C 491.027344 391.980469 486.050781 401.074219 477.832031 406.464844 Z M 497.957031 426.058594 "/>
 <path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 506.582031 423.375 L 520.121094 423.375 L 543.023438 381.28125 L 567.050781 423.375 L 581.496094 423.375 L 542.761719 354.820312 Z M 506.582031 423.375 "/>
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 568.503906 420.878906 L 577.210938 420.878906 L 542.835938 360.035156 L 510.730469 420.878906 L 518.636719 420.878906 L 542.972656 376.144531 Z M 585.78125 425.878906 L 565.601562 425.878906 L 543.074219 386.414062 L 521.609375 425.878906 L 502.4375 425.878906 L 542.6875 349.605469 Z M 585.78125 425.878906 "/>
@@ -498,15 +509,59 @@ footer { background: var(--purple); padding: 2.5rem clamp(1.5rem,5vw,3rem); }
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 656.554688 420.878906 L 698.816406 420.878906 L 698.816406 413.738281 L 663.695312 413.738281 L 663.695312 395.554688 L 692.03125 395.554688 L 692.03125 388.417969 L 663.695312 388.417969 L 663.695312 364.238281 L 698.816406 364.238281 L 698.816406 357.101562 L 656.554688 357.101562 Z M 703.816406 425.878906 L 651.554688 425.878906 L 651.554688 352.101562 L 703.816406 352.101562 L 703.816406 369.238281 L 668.695312 369.238281 L 668.695312 383.417969 L 697.03125 383.417969 L 697.03125 400.554688 L 668.695312 400.554688 L 668.695312 408.738281 L 703.816406 408.738281 Z M 703.816406 425.878906 "/>
 <path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 832.90625 389.382812 C 832.90625 376.351562 843.507812 365.753906 856.535156 365.753906 C 869.566406 365.753906 880.167969 376.351562 880.167969 389.382812 C 880.167969 402.414062 869.566406 413.011719 856.535156 413.011719 C 843.507812 413.011719 832.90625 402.414062 832.90625 389.382812 M 888.054688 428.855469 C 888.054688 428.855469 880.128906 417.246094 879.703125 416.175781 C 887.214844 409.671875 891.980469 400.078125 891.980469 389.382812 C 891.980469 369.839844 876.082031 353.9375 856.535156 353.9375 C 836.992188 353.9375 821.089844 369.839844 821.089844 389.382812 C 821.089844 408.929688 836.992188 424.828125 856.535156 424.828125 C 861.121094 424.828125 865.496094 423.945312 869.519531 422.355469 C 870.109375 423.574219 878.132812 435.292969 878.132812 435.292969 Z M 888.054688 428.855469 "/>
 <path fill-rule="nonzero" fill="rgb(99.215698%, 99.215698%, 98.823547%)" fill-opacity="1" d="M 856.535156 368.253906 C 844.882812 368.253906 835.40625 377.734375 835.40625 389.382812 C 835.40625 401.035156 844.882812 410.511719 856.535156 410.511719 C 868.1875 410.511719 877.667969 401.035156 877.667969 389.382812 C 877.667969 377.734375 868.1875 368.253906 856.535156 368.253906 M 856.535156 415.511719 C 842.128906 415.511719 830.40625 403.792969 830.40625 389.382812 C 830.40625 374.976562 842.128906 363.253906 856.535156 363.253906 C 870.941406 363.253906 882.667969 374.976562 882.667969 389.382812 C 882.667969 403.792969 870.941406 415.511719 856.535156 415.511719 M 870.765625 419.175781 L 871.773438 421.269531 C 872.148438 421.988281 875.441406 426.910156 878.820312 431.867188 L 884.550781 428.148438 C 880.105469 421.613281 877.695312 417.898438 877.378906 417.101562 L 876.722656 415.453125 L 878.066406 414.289062 C 885.320312 408.003906 889.480469 398.929688 889.480469 389.382812 C 889.480469 371.214844 874.703125 356.4375 856.535156 356.4375 C 838.371094 356.4375 823.589844 371.214844 823.589844 389.382812 C 823.589844 407.550781 838.371094 422.328125 856.535156 422.328125 C 860.683594 422.328125 864.742188 421.554688 868.601562 420.03125 Z M 877.449219 438.71875 L 876.070312 436.707031 C 874.207031 433.988281 870.429688 428.441406 868.464844 425.398438 C 864.613281 426.679688 860.613281 427.328125 856.535156 427.328125 C 835.613281 427.328125 818.589844 410.304688 818.589844 389.382812 C 818.589844 368.460938 835.613281 351.4375 856.535156 351.4375 C 877.460938 351.4375 894.480469 368.460938 894.480469 389.382812 C 894.480469 399.679688 890.28125 409.5 882.894531 416.644531 C 884.378906 418.953125 887.359375 423.402344 890.121094 427.445312 L 891.5625 429.558594 Z M 877.449219 438.71875 "/></svg>
-    </a>
-    <ul class="footer-links">
-      <li><a href="#registration">Registration</a></li>
-      <li><a href="#sponsorship">Sponsor Hub</a></li>
-      <li><a href="#waitlist-races">For Races</a></li>
-      <li><a href="#waitlist-brands">For Brands</a></li>
-      <li><a href="mailto:hello@racehq.io">hello@racehq.io</a></li>
-    </ul>
-    <span class="footer-copy">© 2025 RaceHQ Ltd.</span>
+      </a>
+      <p class="footer-tagline">Registration and sponsorship for endurance events.</p>
+      <div class="footer-social">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/racehq.co/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/RaceHQ" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/racehq" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>For Races</h4>
+        <ul>
+          <li><a href="#waitlist-races">Get Early Access</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Brands</h4>
+        <ul>
+          <li><a href="#waitlist-brands">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy &amp; Cookies Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Townbull Sports, LLC. All rights reserved.</span>
   </div>
 </footer>
 
