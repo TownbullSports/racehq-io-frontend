@@ -144,8 +144,8 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 0; }
 .social-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; }
 .social-card { background: rgba(255,255,255,0.05); padding: 2rem; }
 .social-quote { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 1.25rem; }
-.social-quote::before { content: 'C'; }
-.social-quote::after  { content: 'D'; }
+.social-quote::before { content: open-quote; }
+.social-quote::after  { content: close-quote; }
 .social-name { font-size: 0.82rem; font-weight: 700; color: #fff; }
 .social-role { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
@@ -329,13 +329,13 @@ footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem
   </div>
   <div class="feature-visual">
     <div class="product-card">
-      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/city-marathon</div></div>
+      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/8k-san-diego</div></div>
       <div class="pc-body">
-        <div class="pc-event-row"><div class="pc-badge">🏙️</div><div><div class="pc-event-name">City Marathon 2025</div><div class="pc-event-meta">Registration open · 14 weeks to race day</div></div></div>
+        <div class="pc-event-row"><div class="pc-badge">🏖️</div><div><div class="pc-event-name">8K San Diego</div><div class="pc-event-meta">Registration open · 14 weeks to race day</div></div></div>
         <div class="pc-stats">
           <div class="pc-stat"><div class="pc-stat-val">3,241</div><div class="pc-stat-lbl">Registered</div></div>
           <div class="pc-stat"><div class="pc-stat-val">759</div><div class="pc-stat-lbl">Remaining</div></div>
-          <div class="pc-stat"><div class="pc-stat-val">£48k</div><div class="pc-stat-lbl">Revenue</div></div>
+          <div class="pc-stat"><div class="pc-stat-val">$48k</div><div class="pc-stat-lbl">Revenue</div></div>
         </div>
         <div><div class="pc-prog-hd"><span>Capacity</span><span>81%</span></div><div class="pc-prog-bar"><div class="pc-prog-fill"></div></div></div>
         <div class="pc-entry"><div class="pc-av">SJ</div><div class="pc-en">Sarah Johnson</div><div class="pc-et">Full · Wave A</div><div class="pc-ep">Paid</div></div>
@@ -364,7 +364,7 @@ footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem
   </div>
   <div class="feature-visual">
     <div class="product-card">
-      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/city-marathon/sponsors</div></div>
+      <div class="pc-bar"><div class="pcd" style="background:#ff5f57"></div><div class="pcd" style="background:#ffbd2e"></div><div class="pcd" style="background:#28c840"></div><div class="pc-url">racehq.io/events/8k-san-diego/sponsors</div></div>
       <div class="pc-body">
         <div class="pc-hub-lbl">Exclusive Deals for Your Participants</div>
         <div class="pc-deal"><div class="phdl">👟</div><div class="phdi"><div class="phdn">TrailBrand Pro</div><div class="phdd">20% off race-day footwear · code CITY20</div></div><div class="phdcta">Claim →</div></div>
@@ -383,7 +383,7 @@ footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem
 <section id="social">
   <p class="social-eyebrow">What race directors are saying</p>
   <div class="social-grid">
-    <div class="social-card"><p class="social-quote">Finally a registration platform that understands what race directors actually need. The sponsor hub alone will pay for itself ten times over.</p><div class="social-name">Jamie Collins</div><div class="social-role">Race Director · Bristol Half Marathon</div></div>
+    <div class="social-card"><p class="social-quote">Finally a registration platform that understands what race directors actually need. The sponsor hub alone will pay for itself ten times over.</p><div class="social-name">Jamie Collins</div><div class="social-role">Race Director · Boulder Trail Series</div></div>
     <div class="social-card"><p class="social-quote">We've been leaving money on the table for years. Our participants are buying gear anyway — now we get a cut of it. It's a no-brainer.</p><div class="social-name">Priya Mehta</div><div class="social-role">Founder · Urban Endurance Events</div></div>
     <div class="social-card"><p class="social-quote">The affiliate model is so much better than asking brands for cash. Lower barrier, more partners, and the income is actually predictable.</p><div class="social-name">Tom Reeves</div><div class="social-role">Race Director · Peak Trail Series</div></div>
   </div>
@@ -447,7 +447,7 @@ footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem
           <label>Name<input type="text" name="name" placeholder="Your name" required/></label>
           <label>Email<input type="email" name="email" placeholder="you@email.com" required/></label>
         </div>
-        <label>Event Name<input type="text" name="event" placeholder="e.g. Bristol Half Marathon"/></label>
+        <label>Event Name<input type="text" name="event" placeholder="e.g. Austin Marathon"/></label>
         <label>Annual participants
           <select name="size">
             <option value="">Select range</option>
