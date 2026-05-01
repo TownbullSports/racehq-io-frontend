@@ -65,6 +65,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: rgba
 @keyframes pulseAnim { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
 h1 { font-size: clamp(3rem,8vw,6.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; position: relative; z-index: 3; }
 h1 em { font-style: normal; color: var(--yellow); }
+h2 em { font-style: normal; color: var(--purple); }
 .hero-sub { font-size: clamp(1.05rem,2vw,1.25rem); font-weight: 300; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 2.75rem; line-height: 1.7; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; position: relative; z-index: 3; }
 .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; position: relative; z-index: 3; }
 .hero-ctas .btn-outline { color: #fff; border-color: rgba(255,255,255,0.3); }
@@ -316,7 +317,7 @@ footer { background: var(--purple); padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem
 <div class="feature-row" id="registration">
   <div class="feature-text">
     <span class="eyebrow">Event Registration</span>
-    <h2>Everything you need to<br/>run a great race.</h2>
+    <h2>Everything you need to run a <em>great race.</em></h2>
     <p class="lead">Simple, fast registration built for endurance events. Set up in minutes. Participants register in seconds.</p>
     <ul class="feature-points">
       <li><span class="chk"></span>Custom event pages with category &amp; wave management</li>
